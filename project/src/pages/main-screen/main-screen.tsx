@@ -1,6 +1,10 @@
 import PlaceCard from '../../components/place-card/place-card';
 
-function MainScreen () {
+type MainScreenProps = {
+    cardsCount: number;
+}
+// function WelcomeScreen({errorsCount}: WelcomeScreenProps): JSX.Element {
+function MainScreen ({cardsCount}: MainScreenProps):JSX.Element {
     return (
         <div className="page page--gray page--main">
         <header className="header">
@@ -111,11 +115,9 @@ function MainScreen () {
                     </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                    <PlaceCard />
-                    <PlaceCard />
-                    <PlaceCard />
-                    <PlaceCard />
-                    <PlaceCard />
+                    {
+                        Array.from({length: cardsCount}, () => <PlaceCard />).map((el) => el)
+                    }
                 </div>
                 </section>
                 <div className="cities__right-section">
