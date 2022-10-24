@@ -1,4 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {AppRoute} from '../../const';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PlaceScreen from '../../pages/place-screen/place-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -15,25 +16,25 @@ function App({placesCount}: AppScreenProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          path='/'
+          path={AppRoute.Root}
           element={<MainScreen placesCount={placesCount}/>}
         />
       </Routes>
       <Routes>
         <Route
-          path='login'
+          path={AppRoute.Login}
           element={<LoginScreen />}
         />
         <Route
-          path='favorites'
+          path={AppRoute.Favorites}
           element={<FavoritesScreen />}
         />
         <Route
-          path='offer/:id'
+          path={AppRoute.Offer}
           element={<PlaceScreen />}
         />
         <Route
-          path='*'
+          path={AppRoute.NotFound}
           element={<NotFound404Screen />}
         />
       </Routes>
