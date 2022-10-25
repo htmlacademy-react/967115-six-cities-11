@@ -1,5 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PlaceScreen from '../../pages/place-screen/place-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -27,10 +28,16 @@ function App({placesCount}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritesScreen />}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.NoAuth}
+            >
+              <FavoritesScreen />
+            </PrivateRoute>
+          }
         />
         <Route
-          path={AppRoute.Offer}
+          path={`${AppRoute.Offer}/:id`}
           element={<PlaceScreen />}
         />
         <Route
