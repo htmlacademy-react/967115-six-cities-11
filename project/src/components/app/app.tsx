@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoutes, AuthorizationStatuses} from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PlaceScreen from '../../pages/place-screen/place-screen';
@@ -17,31 +17,31 @@ function App({placesCount}: AppScreenProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRoute.Root}
+          path={AppRoutes.Root}
           element={<MainScreen placesCount={placesCount}/>}
         />
       </Routes>
       <Routes>
         <Route
-          path={AppRoute.Login}
+          path={AppRoutes.Login}
           element={<LoginScreen />}
         />
         <Route
-          path={AppRoute.Favorites}
+          path={AppRoutes.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatuses.NoAuth}
             >
               <FavoritesScreen />
             </PrivateRoute>
           }
         />
         <Route
-          path={`${AppRoute.Offer}/:id`}
+          path={`${AppRoutes.Offer}/:id`}
           element={<PlaceScreen />}
         />
         <Route
-          path={AppRoute.NotFound}
+          path={AppRoutes.NotFound}
           element={<NotFound404Screen />}
         />
       </Routes>
