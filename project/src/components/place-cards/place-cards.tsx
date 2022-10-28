@@ -7,9 +7,11 @@ type PlaceCardsProps = {
 
 function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
   const [firstOffer] = offers;
-  
+
   return (
     <>
+      <PlaceCard offer={firstOffer}/>
+      <PlaceCard offer={firstOffer}/>
       <PlaceCard offer={firstOffer}/>
     </>
   );

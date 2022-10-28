@@ -7,9 +7,13 @@ type PlaceCardProps = {
 function PlaceCard ({offer}: PlaceCardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+
+      {offer.isPremium
+        ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
           <img
