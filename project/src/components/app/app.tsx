@@ -6,7 +6,7 @@ import PlaceScreen from '../../pages/place-screen/place-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFound404Screen from '../../pages/not-found-404-screen/not-found-404-screen';
-import Offer from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 
 type AppScreenProps = {
@@ -15,6 +15,8 @@ type AppScreenProps = {
 }
 
 function App({placesCount, offers}: AppScreenProps): JSX.Element {
+  const [firstOffer] = offers; // для отработки передачи данных в компонент PlaceScreen
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -40,7 +42,7 @@ function App({placesCount, offers}: AppScreenProps): JSX.Element {
         />
         <Route
           path={`${AppRoutes.Offer}/:id`}
-          element={<PlaceScreen />}
+          element={<PlaceScreen offer={firstOffer} />}
         />
         <Route
           path={AppRoutes.NotFound}

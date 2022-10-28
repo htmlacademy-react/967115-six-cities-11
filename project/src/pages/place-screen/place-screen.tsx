@@ -1,4 +1,12 @@
-function PlaceScreen (): JSX.Element {
+import {Offer} from '../../types/offer';
+
+type PlaceScreenProps = {
+  offer: Offer;
+}
+
+function PlaceScreen (props: PlaceScreenProps): JSX.Element {
+  const {offer} = props;
+  
   return (
     <div className="page">
       <header className="header">
