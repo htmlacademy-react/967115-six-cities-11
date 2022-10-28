@@ -1,4 +1,10 @@
-function PlaceCard (): JSX.Element {
+import {Offer} from '../../types/offer';
+
+type PlaceCardProps = {
+  offer: Offer;
+}
+
+function PlaceCard ({offer}: PlaceCardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -43,7 +49,7 @@ function PlaceCard (): JSX.Element {
         </div>
         <h2 className="place-card__name">
           <a href="/">
-                            Beautiful &amp; luxurious apartment at great location
+              Beautiful &amp; luxurious apartment at great location
           </a>
         </h2>
         <p className="place-card__type">Apartment</p>
