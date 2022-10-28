@@ -6,7 +6,7 @@ type PlaceScreenProps = {
 
 function PlaceScreen (props: PlaceScreenProps): JSX.Element {
   const {offer} = props;
-  
+
   return (
     <div className="page">
       <header className="header">
