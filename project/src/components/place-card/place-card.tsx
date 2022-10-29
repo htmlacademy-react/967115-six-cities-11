@@ -3,15 +3,16 @@ import {MAX_PLACE_RATING} from '../../constants';
 
 type PlaceCardProps = {
   offer: Offer;
+  key: number;
 }
 
 // Функция приведения числового рейтинга к звездам.
 // Нужно получить ширину в процентах от 100
 function starRating (rating: number): number {
-  return Math.floor(rating) * 100 / MAX_PLACE_RATING;
+  return Math.round(rating) * 100 / MAX_PLACE_RATING;
 }
 
-function PlaceCard ({offer}: PlaceCardProps): JSX.Element {
+function PlaceCard ({offer, key}: PlaceCardProps): JSX.Element {
   const {
     isPremium,
     previewImage,

@@ -7,14 +7,10 @@ type PlaceCardsProps = {
 }
 
 function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
-  const [firstOffer] = offers;
-  const [activeCardID, setActiveCardID] = useState(2);
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      <PlaceCard offer={firstOffer}/>
-      <PlaceCard offer={firstOffer}/>
-      <PlaceCard offer={firstOffer}/>
+      {offers.map((offer) => <PlaceCard offer={offer} key={offer.id} />)}
     </div>
   );
 }
