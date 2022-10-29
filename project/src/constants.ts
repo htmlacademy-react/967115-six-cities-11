@@ -12,4 +12,13 @@ export enum AuthorizationStatuses {
     Unknown = 'UNKNOWN'
 }
 
+export const Cities = {
+  Brussels: 'Brussels',
+  Cologne: 'Cologne',
+  Hamburg: 'Hamburg',
+  Paris: 'Paris',
+  Amsterdam: 'Amsterdam',
+  Dusseldorf: 'Dusseldorf'
+};
+
 export const MAX_PLACE_RATING = 5;
