@@ -23,8 +23,6 @@ function App({placesCount, offers}: AppScreenProps): JSX.Element {
           path={AppRoutes.Root}
           element={<MainScreen placesCount={placesCount} offers={offers} />}
         />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoutes.Login}
           element={<LoginScreen />}

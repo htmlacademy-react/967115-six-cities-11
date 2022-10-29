@@ -1,18 +1,12 @@
 import {Offer} from '../../types/offer';
-import {MAX_PLACE_RATING} from '../../constants';
+import {setStarRating} from '../../utils';
 
 type PlaceCardProps = {
   offer: Offer;
-  key: number;
+  handlePlaceCardMouseEnter: (offer: Offer) => void;
 }
 
-// Функция приведения числового рейтинга к звездам.
-// Нужно получить ширину в процентах от 100
-function starRating (rating: number): number {
-  return Math.round(rating) * 100 / MAX_PLACE_RATING;
-}
-
-function PlaceCard ({offer, key}: PlaceCardProps): JSX.Element {
+function PlaceCard ({offer, handlePlaceCardMouseEnter}: PlaceCardProps): JSX.Element {
   const {
     isPremium,
     previewImage,
@@ -23,8 +17,7 @@ function PlaceCard ({offer, key}: PlaceCardProps): JSX.Element {
   } = offer;
 
   return (
-    <article className="cities__card place-card">
-
+    <article className="cities__card place-card" onMouseEnter={() => {handlePlaceCardMouseEnter(offer);}}>
       {isPremium
         ?
         <div className="place-card__mark">
@@ -64,8 +57,7 @@ function PlaceCard ({offer, key}: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            todo: вычислить ширину в зависимости от рейтинга
-            <span style={{ width: `${starRating(rating)}%`}} />
+            <span style={{ width: `${setStarRating(rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
