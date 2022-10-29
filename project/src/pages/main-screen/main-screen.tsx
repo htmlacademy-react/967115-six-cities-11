@@ -116,9 +116,7 @@ function MainScreen ({placesCount, offers}: MainScreenProps):JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCards offers={offers}/>
-              </div>
+              <PlaceCards offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />

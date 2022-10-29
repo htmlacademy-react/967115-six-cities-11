@@ -15,7 +15,6 @@ type AppScreenProps = {
 }
 
 function App({placesCount, offers}: AppScreenProps): JSX.Element {
-  const [firstOffer] = offers; // для отработки передачи данных в компонент PlaceScreen
 
   return (
     <BrowserRouter>
@@ -42,7 +41,7 @@ function App({placesCount, offers}: AppScreenProps): JSX.Element {
         />
         <Route
           path={`${AppRoutes.Offer}/:id`}
-          element={<PlaceScreen offer={firstOffer} />}
+          element={<PlaceScreen />}
         />
         <Route
           path={AppRoutes.NotFound}

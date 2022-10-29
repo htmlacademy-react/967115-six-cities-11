@@ -11,3 +11,5 @@ export enum AuthorizationStatuses {
     NoAuth = 'NO_AUTH',
     Unknown = 'UNKNOWN'
 }
+
+export const MAX_PLACE_RATING = 5;
