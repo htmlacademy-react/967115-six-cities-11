@@ -2,6 +2,7 @@ import {Offer} from '../../types/offer';
 import {Cities} from '../../constants';
 import {Filter} from '../../utils';
 import {Link} from 'react-router-dom';
+import {setStarRating} from '../../utils';
 
 type FavoritesScreenProps = {
   offers: Offer[];
@@ -12,17 +13,22 @@ function formCards (city: string, offers: Offer[]) {
   return (
     <>
       {cityOffers.map((cityOffer) =>
-      { const {price, id} = cityOffer;
+      { const {price, id, isPremium, previewImage, rating, title, type} = cityOffer;
         return (
           <article key={id} className="favorites__card place-card">
-            <div className="place-card__mark">
-              <span>Premium</span>
-            </div>
+            {
+              isPremium
+                ? ''
+                :
+                <div className="place-card__mark">
+                  <span>Premium</span>
+                </div>
+            }
             <div className="favorites__image-wrapper place-card__image-wrapper">
               <Link to={`../offer/${cityOffer.id}`} >
                 <img
                   className="place-card__image"
-                  src="img/apartment-small-03.jpg"
+                  src={previewImage}
                   width={150}
                   height={110}
                   alt="Place"
@@ -53,14 +59,14 @@ function formCards (city: string, offers: Offer[]) {
               </div>
               <div className="place-card__rating rating">
                 <div className="place-card__stars rating__stars">
-                  <span style={{ width: '100%' }} />
+                  <span style={{ width: `${setStarRating(rating)}%`}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
               </div>
               <h2 className="place-card__name">
-                <Link to={`../offer/${cityOffer.id}`} >Nice, cozy, warm big bed apartment</Link>
+                <Link to={`../offer/${cityOffer.id}`} >{title}</Link>
               </h2>
-              <p className="place-card__type">Apartment</p>
+              <p className="place-card__type">{type}</p>
             </div>
           </article>);}
       )}
