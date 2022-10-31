@@ -1,6 +1,7 @@
 import {Offer} from '../../types/offer';
 import {Cities} from '../../constants';
 import {Filter} from '../../utils';
+import {Link} from 'react-router-dom';
 
 type FavoritesScreenProps = {
   offers: Offer[];
@@ -11,14 +12,14 @@ function formCards (city: string, offers: Offer[]) {
   return (
     <>
       {cityOffers.map((cityOffer) =>
-      { const {price} = cityOffer;
+      { const {price, id} = cityOffer;
         return (
-          <article className="favorites__card place-card">
+          <article key={id} className="favorites__card place-card">
             <div className="place-card__mark">
               <span>Premium</span>
             </div>
             <div className="favorites__image-wrapper place-card__image-wrapper">
-              <a href="/">
+              <Link to={`../offer/${cityOffer.id}`} >
                 <img
                   className="place-card__image"
                   src="img/apartment-small-03.jpg"
@@ -26,7 +27,7 @@ function formCards (city: string, offers: Offer[]) {
                   height={110}
                   alt="Place"
                 />
-              </a>
+              </Link>
             </div>
             <div className="favorites__card-info place-card__info">
               <div className="place-card__price-wrapper">
@@ -57,7 +58,7 @@ function formCards (city: string, offers: Offer[]) {
                 </div>
               </div>
               <h2 className="place-card__name">
-                <a href="/">Nice, cozy, warm big bed apartment</a>
+                <Link to={`../offer/${cityOffer.id}`} >Nice, cozy, warm big bed apartment</Link>
               </h2>
               <p className="place-card__type">Apartment</p>
             </div>
@@ -75,7 +76,7 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -83,26 +84,23 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
                   width={81}
                   height={41}
                 />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="/"
-                  >
+                  <Link to='/' className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
                         Oliver.conner@gmail.com
                     </span>
                     <span className="header__favorite-count">3</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="/">
+                  <Link className="header__nav-link" to="/">
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -118,12 +116,12 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
                 cities.map((city) =>
                   (Filter[city](offers).length === 0) ? ''
                     : (
-                      <li className="favorites__locations-items">
+                      <li key={city} className="favorites__locations-items">
                         <div className="favorites__locations locations locations--current">
                           <div className="locations__item">
-                            <a className="locations__item-link" href="/">
+                            <Link className="locations__item-link" to="/">
                               <span>{city}</span>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                         <div className="favorites__places">
@@ -137,7 +135,7 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to="/">
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -145,7 +143,7 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
             width={64}
             height={33}
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );

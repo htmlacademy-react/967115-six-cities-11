@@ -1,5 +1,6 @@
 import {Offer} from '../../types/offer';
 import {setStarRating} from '../../utils';
+import {Link} from 'react-router-dom';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -25,7 +26,7 @@ function PlaceCard ({offer, handlePlaceCardMouseEnter}: PlaceCardProps): JSX.Ele
         </div>
         : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <Link to={`../offer/${offer.id}`} >
           <img
             className="place-card__image"
             src={previewImage}
@@ -33,7 +34,7 @@ function PlaceCard ({offer, handlePlaceCardMouseEnter}: PlaceCardProps): JSX.Ele
             height={200}
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -62,9 +63,9 @@ function PlaceCard ({offer, handlePlaceCardMouseEnter}: PlaceCardProps): JSX.Ele
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">
+          <Link to={`../offer/${offer.id}`} >
             {title}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
