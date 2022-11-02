@@ -32,8 +32,8 @@ export const offers: Offer[] = [
     isPremium: true,
     rating: 3.6,
     type: 'room',
-    bedrooms: 1,
-    maxAdults: 2,
+    bedrooms: 2,
+    maxAdults: 1,
     price: 237,
     goods: [
       'Air conditioning',

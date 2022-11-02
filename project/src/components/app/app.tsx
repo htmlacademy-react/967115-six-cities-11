@@ -39,7 +39,7 @@ function App({placesCount, offers}: AppScreenProps): JSX.Element {
         />
         <Route
           path={`${AppRoutes.Offer}/:id`}
-          element={<PlaceScreen />}
+          element={<PlaceScreen offers={offers} />}
         />
         <Route
           path={AppRoutes.NotFound}

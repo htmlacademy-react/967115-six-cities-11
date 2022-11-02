@@ -22,3 +22,5 @@ export const Cities = {
 };
 
 export const MAX_PLACE_RATING = 5;
+
+export const MAX_PLACE_IMAGES = 6;
