@@ -7,7 +7,7 @@ type PlaceCardsProps = {
 }
 
 function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
-  const [activePlaceCardID, setActivePlaceCardId] = useState(0);
+  const [, setActivePlaceCardId] = useState(0);
 
   const handlePlaceCardMouseEnter = (offer: Offer) => {
     setActivePlaceCardId(offer.id);
