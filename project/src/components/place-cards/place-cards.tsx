@@ -17,7 +17,14 @@ function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
     <div
       className="cities__places-list places__list tabs__content"
     >
-      {offers.map((offer) => <PlaceCard offer={offer} key={offer.id} handlePlaceCardMouseEnter={handlePlaceCardMouseEnter} />)}
+      {offers.map((offer) =>
+        (
+          <PlaceCard
+            offer={offer}
+            key={offer.id}
+            handlePlaceCardMouseEnter={handlePlaceCardMouseEnter}
+          />
+        ))}
     </div>
   );
 }
