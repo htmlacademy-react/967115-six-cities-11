@@ -11,7 +11,8 @@ type PlaceScreenProps = {
 function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
   const params = useParams();
   const offer = offers.find((currentOffer) =>
-    params.id ? currentOffer.id.toString() === params.id : null) as Offer;
+    params.id ? currentOffer.id.toString() === params.id : null);
+  if (!offer) {return <></>;}
   const {
     price,
     images,
