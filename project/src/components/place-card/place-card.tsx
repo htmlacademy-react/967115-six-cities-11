@@ -30,7 +30,7 @@ function PlaceCard ({offer, handlePlaceCardMouseEnter}: PlaceCardProps): JSX.Ele
             src={previewImage}
             width={260}
             height={200}
-            alt="Place"
+            alt=""
           />
         </Link>
       </div>

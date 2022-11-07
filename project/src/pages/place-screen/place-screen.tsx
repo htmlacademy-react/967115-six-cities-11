@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {MAX_PLACE_IMAGES} from '../../constants';
 import {setStarRating} from '../../utils';
-import ReviewForm from '../../components/entered-review/entered-review';
+import ReviewForm from '../../components/review-form/review-form';
 
 type PlaceScreenProps = {
   offers: Offer[];
@@ -34,7 +34,7 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -73,17 +73,15 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                placeImages.map((placeImage, id) => {
-                  const keyValue = `${placeImage}-${id}`;
-                  return (
-                    <div key={keyValue} className="property__image-wrapper">
-                      <img
-                        className="property__image"
-                        src={placeImage}
-                        alt="Studio"
-                      />
-                    </div>
-                  );})
+                placeImages.map((placeImage) => (
+                  <div key={placeImage} className="property__image-wrapper">
+                    <img
+                      className="property__image"
+                      src={placeImage}
+                      alt=""
+                    />
+                  </div>
+                ))
               }
             </div>
           </div>
@@ -132,8 +130,8 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {
-                    goods.map((good, id) => {
-                      const keyValue = id;
+                    goods.map((good, index) => {
+                      const keyValue = index;
                       return (
                         <li key={keyValue} className="property__inside-item">{good}</li>
                       );
@@ -218,7 +216,7 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                       src="img/room.jpg"
                       width={260}
                       height={200}
-                      alt="Place"
+                      alt=""
                     />
                   </Link>
                 </div>
@@ -262,7 +260,7 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                       src="img/apartment-02.jpg"
                       width={260}
                       height={200}
-                      alt="Place"
+                      alt=""
                     />
                   </Link>
                 </div>
@@ -309,7 +307,7 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                       src="img/apartment-03.jpg"
                       width={260}
                       height={200}
-                      alt="Place"
+                      alt=""
                     />
                   </Link>
                 </div>
