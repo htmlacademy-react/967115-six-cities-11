@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {MAX_PLACE_IMAGES} from '../../constants';
 import {setStarRating} from '../../utils';
-import EnteredReview from '../../components/entered-review/entered-review';
+import ReviewForm from '../../components/entered-review/entered-review';
 
 type PlaceScreenProps = {
   offers: Offer[];
@@ -198,7 +198,7 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <EnteredReview />
+                <ReviewForm />
               </section>
             </div>
           </div>

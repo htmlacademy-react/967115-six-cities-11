@@ -1,6 +1,6 @@
 import {useState, ChangeEvent} from 'react';
 
-function EnteredReview () {
+function ReviewForm () {
   const [formData, setFormData] = useState({
     rating: '',
     comment: ''
@@ -130,4 +130,4 @@ function EnteredReview () {
   );
 }
 
-export default EnteredReview;
+export default ReviewForm;
