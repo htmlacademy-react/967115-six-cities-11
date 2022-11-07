@@ -90,12 +90,10 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
           <div className="property__container container">
             <div className="property__wrapper">
               {
-                isPremium
-                  ?
+                isPremium &&
                   <div className="property__mark">
                     <span>Premium</span>
                   </div>
-                  : ''
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
@@ -156,7 +154,7 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                     />
                   </div>
                   <span className="property__user-name">{name}</span>
-                  {isPro ? (<span className="property__user-status">Pro</span>) : ''}
+                  {isPro && (<span className="property__user-status">Pro</span>)}
                 </div>
                 <div className="property__description">
                   <p className="property__text">

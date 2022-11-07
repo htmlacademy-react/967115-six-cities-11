@@ -17,9 +17,7 @@ function formCards (city: string, offers: Offer[]) {
         return (
           <article key={id} className="favorites__card place-card">
             {
-              isPremium
-                ? ''
-                :
+              isPremium &&
                 <div className="place-card__mark">
                   <span>Premium</span>
                 </div>

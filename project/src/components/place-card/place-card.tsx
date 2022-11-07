@@ -19,12 +19,10 @@ function PlaceCard ({offer, handlePlaceCardMouseEnter}: PlaceCardProps): JSX.Ele
 
   return (
     <article className="cities__card place-card" onMouseEnter={() => {handlePlaceCardMouseEnter(offer);}}>
-      {isPremium
-        ?
+      {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div>
-        : null}
+        </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`../offer/${offer.id}`} >
           <img
