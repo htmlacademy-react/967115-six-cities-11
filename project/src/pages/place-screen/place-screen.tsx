@@ -1,11 +1,24 @@
-function PlaceScreen (): JSX.Element {
+import { Link, useParams } from 'react-router-dom';
+import {Offer} from '../../types/offer';
+import {MAX_PLACE_IMAGES} from '../../constants';
+import {setStarRating} from '../../utils';
+import ReviewForm from '../../components/review-form/review-form';
+
+type PlaceScreenProps = {
+  offers: Offer[];
+}
+
+function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
+  const params = useParams();
+  const offer = offers.find((currentOffer) =>
+    params.id ? currentOffer.id.toString() === params.id : null);
   return (
     <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -13,91 +26,64 @@ function PlaceScreen (): JSX.Element {
                   width={81}
                   height={41}
                 />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a
+                  <Link
                     className="header__nav-link header__nav-link--profile"
-                    href="/"
+                    to="/"
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
                         Oliver.conner@gmail.com
                     </span>
                     <span className="header__favorite-count">3</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="/">
+                  <Link className="header__nav-link" to="/">
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
       </header>
+      {offer &&
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/room.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-01.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-02.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-03.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/studio-01.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-01.jpg"
-                  alt="Studio"
-                />
-              </div>
+              {
+                offer.images.slice(0, MAX_PLACE_IMAGES).map((placeImage) => (
+                  <div key={placeImage} className="property__image-wrapper">
+                    <img
+                      className="property__image"
+                      src={placeImage}
+                      alt=""
+                    />
+                  </div>
+                ))
+              }
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {
+                offer.isPremium &&
+                  <div className="property__mark">
+                    <span>Premium</span>
+                  </div>
+              }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                    Beautiful &amp; luxurious studio at great location
+                  {offer.title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width={31} height={33}>
+                  <svg className={offer.isFavorite ? 'place-card__bookmark-icon' : 'property__bookmark-icon'} width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -105,39 +91,32 @@ function PlaceScreen (): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80%' }} />
+                  <span style={{ width: `${setStarRating(offer.rating)}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                    Apartment
+                  {offer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                    3 Bedrooms
+                  {`${offer.bedrooms} Bedroom${offer.bedrooms > 1 ? 's' : ''}`}
                 </li>
                 <li className="property__feature property__feature--adults">
-                    Max 4 adults
+                  {`Max ${offer.maxAdults} adult${offer.maxAdults > 1 ? 's' : ''}`}
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">€120</b>
+                <b className="property__price-value">€{offer.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">Wi-Fi</li>
-                  <li className="property__inside-item">Washing machine</li>
-                  <li className="property__inside-item">Towels</li>
-                  <li className="property__inside-item">Heating</li>
-                  <li className="property__inside-item">Coffee machine</li>
-                  <li className="property__inside-item">Baby seat</li>
-                  <li className="property__inside-item">Kitchen</li>
-                  <li className="property__inside-item">Dishwasher</li>
-                  <li className="property__inside-item">Cabel TV</li>
-                  <li className="property__inside-item">Fridge</li>
+                  {
+                    offer.goods.map((good) => <li key={good} className="property__inside-item">{good}</li>)
+                  }
                 </ul>
               </div>
               <div className="property__host">
@@ -146,25 +125,18 @@ function PlaceScreen (): JSX.Element {
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="property__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src={offer.host.avatarUrl}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="property__user-name">Angelina</span>
-                  <span className="property__user-status">Pro</span>
+                  <span className="property__user-name">{offer.host.name}</span>
+                  {offer.host.isPro && (<span className="property__user-status">Pro</span>)}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                        A quiet cozy and picturesque that hides behind a a river by the
-                        unique lightness of Amsterdam. The building is green and from
-                        18th century.
-                  </p>
-                  <p className="property__text">
-                        An independent House, strategically located between Rembrand
-                        Square and National Opera, but where the bustle of the city
-                        comes to rest in this alley flowery and colorful.
+                    {offer.description}
                   </p>
                 </div>
               </div>
@@ -204,115 +176,7 @@ function PlaceScreen (): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">
-                        Your review
-                  </label>
-                  <div className="reviews__rating-form form__rating">
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={5}
-                      id="5-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="5-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="perfect"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={4}
-                      id="4-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="4-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="good"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={3}
-                      id="3-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="3-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="not bad"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={2}
-                      id="2-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="2-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="badly"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={1}
-                      id="1-star"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="1-star"
-                      className="reviews__rating-label form__rating-label"
-                      title="terribly"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea
-                    className="reviews__textarea form__textarea"
-                    id="review"
-                    name="review"
-                    placeholder="Tell how was your stay, what you like and what can be improved"
-                    defaultValue={''}
-                  />
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                        To submit review please make sure to set{' '}
-                      <span className="reviews__star">rating</span> and describe
-                        your stay with at least{' '}
-                      <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button
-                      className="reviews__submit form__submit button"
-                      type="submit"
-                      disabled
-                    >
-                        Submit
-                    </button>
-                  </div>
-                </form>
+                <ReviewForm />
               </section>
             </div>
           </div>
@@ -326,15 +190,15 @@ function PlaceScreen (): JSX.Element {
             <div className="near-places__list places__list">
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="/">
+                  <Link to="/">
                     <img
                       className="place-card__image"
                       src="img/room.jpg"
                       width={260}
                       height={200}
-                      alt="Place"
+                      alt=""
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -363,22 +227,22 @@ function PlaceScreen (): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="/">Wood and stone place</a>
+                    <Link to="/">Wood and stone place</Link>
                   </h2>
                   <p className="place-card__type">Private room</p>
                 </div>
               </article>
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="/">
+                  <Link to="/">
                     <img
                       className="place-card__image"
                       src="img/apartment-02.jpg"
                       width={260}
                       height={200}
-                      alt="Place"
+                      alt=""
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -407,7 +271,7 @@ function PlaceScreen (): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="/">Canal View Prinsengracht</a>
+                    <Link to="/">Canal View Prinsengracht</Link>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -417,15 +281,15 @@ function PlaceScreen (): JSX.Element {
                   <span>Premium</span>
                 </div>
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="/">
+                  <Link to="/">
                     <img
                       className="place-card__image"
                       src="img/apartment-03.jpg"
                       width={260}
                       height={200}
-                      alt="Place"
+                      alt=""
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -454,7 +318,7 @@ function PlaceScreen (): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="/">Nice, cozy, warm big bed apartment</a>
+                    <Link to="/">Nice, cozy, warm big bed apartment</Link>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -462,7 +326,7 @@ function PlaceScreen (): JSX.Element {
             </div>
           </section>
         </div>
-      </main>
+      </main>}
     </div>
 
   );
