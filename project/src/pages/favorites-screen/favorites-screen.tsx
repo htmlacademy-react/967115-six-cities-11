@@ -64,7 +64,6 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
                           </div>
                         </div>
                         <div className="favorites__places">
-                          {/* {formCards(city, offers)} */}
                           <CityCards city={city} offers={offers} />
                         </div>
                       </li>)

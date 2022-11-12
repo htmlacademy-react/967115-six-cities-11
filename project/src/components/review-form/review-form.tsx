@@ -1,5 +1,5 @@
 import {useState, ChangeEvent} from 'react';
-import {MAX_PLACE_RATING, MIN_PLACE_RARING} from '../../constants';
+import {MAX_PLACE_RATING, MIN_PLACE_RATING} from '../../constants';
 
 function ReviewForm () {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ function ReviewForm () {
 
   const getRatingContent = () => {
     const ratingContent = [];
-    for (let i = MAX_PLACE_RATING; i >= MIN_PLACE_RARING; i--) {
+    for (let i = MAX_PLACE_RATING; i >= MIN_PLACE_RATING; i--) {
       ratingContent.push(
         <>
           <input
