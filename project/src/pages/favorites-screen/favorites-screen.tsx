@@ -2,6 +2,7 @@ import {Offer} from '../../types/offer';
 import {Cities} from '../../constants';
 import {Link} from 'react-router-dom';
 import CityCards from '../../components/city-cards/city-cards';
+import {offersInCity} from '../../utils';
 
 type FavoritesScreenProps = {
   offers: Offer[];
@@ -53,8 +54,7 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
             <ul className="favorites__list">
               {
                 cities.map((city) =>
-                  (offers.filter((offer) => offer.city.name === city).length === 0) ? ''
-                    : (
+                  (offersInCity.length === 0) &&
                       <li key={city} className="favorites__locations-items">
                         <div className="favorites__locations locations locations--current">
                           <div className="locations__item">
@@ -66,7 +66,7 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
                         <div className="favorites__places">
                           <CityCards city={city} offers={offers} />
                         </div>
-                      </li>)
+                      </li>
                 )
               }
             </ul>

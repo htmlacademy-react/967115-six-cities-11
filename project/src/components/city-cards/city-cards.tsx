@@ -1,6 +1,6 @@
 import {Offer} from '../../types/offer';
 import {Link} from 'react-router-dom';
-import {setStarRating} from '../../utils';
+import {setStarRating, offersInCity} from '../../utils';
 
 type CityCardsProps = {
   city: string;
@@ -8,7 +8,8 @@ type CityCardsProps = {
 }
 
 function CityCards ({city, offers}: CityCardsProps): JSX.Element {
-  const cityOffers = offers.filter((offer) => offer.city.name === city);
+  const cityOffers = offersInCity(offers, city);
+
   return (
     <>
       {cityOffers.map((cityOffer) =>

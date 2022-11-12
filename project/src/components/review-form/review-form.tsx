@@ -1,5 +1,5 @@
-import {useState, ChangeEvent} from 'react';
-import {MAX_PLACE_RATING, MIN_PLACE_RATING} from '../../constants';
+import {useState, ChangeEvent, Fragment} from 'react';
+import {MAX_PLACE_RATING} from '../../constants';
 
 function ReviewForm () {
   const [formData, setFormData] = useState({
@@ -18,30 +18,33 @@ function ReviewForm () {
   };
 
   const getRatingContent = () => {
-    const ratingContent = [];
-    for (let i = MAX_PLACE_RATING; i >= MIN_PLACE_RATING; i--) {
-      ratingContent.push(
-        <>
-          <input
-            className="form__rating-input visually-hidden"
-            name="rating"
-            defaultValue={i}
-            id={`${i}-stars`}
-            type="radio"
-          />
-          <label
-            htmlFor={`${i}-stars`}
-            className="reviews__rating-label form__rating-label"
-            title="perfect"
-          >
-            <svg className="form__star-image" width={37} height={33}>
-              <use xlinkHref="#icon-star" />
-            </svg>
-          </label>
-        </>
-      );
-    }
-    return ratingContent;
+    const ratingScale: number[] = Array.from({length: MAX_PLACE_RATING}, (_, i) => i + 1);
+    return (
+      <>
+        {
+          ratingScale.map((currentRating) => (
+            <Fragment key={currentRating}>
+              <input
+                className="form__rating-input visually-hidden"
+                name="rating"
+                defaultValue={currentRating}
+                id={`${currentRating}-stars`}
+                type="radio"
+              />
+              <label
+                htmlFor={`${currentRating}-stars`}
+                className="reviews__rating-label form__rating-label"
+                title="perfect"
+              >
+                <svg className="form__star-image" width={37} height={33}>
+                  <use xlinkHref="#icon-star" />
+                </svg>
+              </label>
+            </Fragment>
+          ))
+        }
+      </>
+    );
   };
 
   return (
