@@ -1,4 +1,4 @@
-import { City } from "../types/city";
+import { City } from '../types/city';
 
 export const cities: City[] = [
   {
@@ -9,4 +9,4 @@ export const cities: City[] = [
       zoom: 13
     },
   }
-]
+];
