@@ -10,8 +10,9 @@ type PlaceScreenProps = {
 
 function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
   const params = useParams();
-  const offer = offers.find((currentOffer) =>
-    params.id ? currentOffer.id.toString() === params.id : null);
+  const offer = params.id
+    ? offers.find((item) => item.id.toString() === params.id)
+    : null;
   return (
     <div className="page">
       <header className="header">
@@ -115,7 +116,11 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {
-                    offer.goods.map((good) => <li key={good} className="property__inside-item">{good}</li>)
+                    offer.goods.map((good) => (
+                      <li key={good} className="property__inside-item">
+                        {good}
+                      </li>)
+                    )
                   }
                 </ul>
               </div>

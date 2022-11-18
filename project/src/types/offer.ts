@@ -1,12 +1,7 @@
+import { City } from './city';
+
 export type Offer = {
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
+  city: City;
   previewImage: string;
   images: string[];
   title: string;
