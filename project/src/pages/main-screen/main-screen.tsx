@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import PlaceCards from '../../components/place-cards/place-cards';
 import {Offer} from '../../types/offer';
+import Map from '../../components/map/map';
+import {cities} from '../../mocks/cities';
 
 type MainScreenProps = {
     placesCount: number;
@@ -120,7 +122,7 @@ function MainScreen ({placesCount, offers}: MainScreenProps):JSX.Element {
               <PlaceCards offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map city={cities[0]}/>
             </div>
           </div>
         </div>
