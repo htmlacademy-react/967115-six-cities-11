@@ -10,7 +10,6 @@ function useMap (
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    console.log(333);
     if (mapRef.current !== null && isRenderedRef.current === false) {
       const instance = new Map(mapRef.current, {
         center: {
@@ -20,7 +19,7 @@ function useMap (
         zoom: city.location.zoom
       });
 
-      
+
       const layer = new TileLayer(
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
         {
@@ -33,8 +32,7 @@ function useMap (
 
       setMap(instance);
       isRenderedRef.current = true;
-      console.log(111);
-    } 
+    }
   }, [mapRef, city]);
 
   return map;
