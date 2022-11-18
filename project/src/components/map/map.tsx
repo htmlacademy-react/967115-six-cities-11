@@ -37,7 +37,6 @@ function Map ({city, offers}: MapProps):JSX.Element {
   return (
     <section
       className="cities__map map"
-      style={{height: '794px'}}
       ref={mapRef}
     >
     </section>

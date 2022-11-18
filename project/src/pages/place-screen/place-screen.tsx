@@ -116,9 +116,11 @@ function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {
-                    offer.goods.map((good) => <li key={good} className="property__inside-item">
-                      {good}
-                    </li>)
+                    offer.goods.map((good) => (
+                      <li key={good} className="property__inside-item">
+                        {good}
+                      </li>)
+                    )
                   }
                 </ul>
               </div>
