@@ -3,6 +3,7 @@ import PlaceCards from '../../components/place-cards/place-cards';
 import {Offer} from '../../types/offer';
 import Map from '../../components/map/map';
 import {cities} from '../../mocks/cities';
+import CitiesList from '../../components/cities-list/cities-list';
 
 type MainScreenProps = {
     placesCount: number;
@@ -54,7 +55,7 @@ function MainScreen ({placesCount, offers}: MainScreenProps):JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
+            {/* <ul className="locations__list tabs__list">
               <li className="locations__item">
                 <Link className="locations__item-link tabs__item" to="/">
                   <span>Paris</span>
@@ -85,7 +86,8 @@ function MainScreen ({placesCount, offers}: MainScreenProps):JSX.Element {
                   <span>Dusseldorf</span>
                 </Link>
               </li>
-            </ul>
+            </ul> */}
+            <CitiesList cities={cities}/>
           </section>
         </div>
         <div className="cities">
