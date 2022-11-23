@@ -29,7 +29,6 @@ function useMap (
       );
 
       instance.addLayer(layer);
-
       setMap(instance);
       isRenderedRef.current = true;
     }

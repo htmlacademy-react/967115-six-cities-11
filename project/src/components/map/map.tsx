@@ -2,7 +2,7 @@ import {City} from '../../types/city';
 import { Offer } from '../../types/offer';
 import {useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
-import { Icon, Marker } from 'leaflet';
+import { Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_DEFAULT} from '../../constants';
 
@@ -20,18 +20,23 @@ const defaultCustomIcon = new Icon ({
 function Map ({city, offers}: MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
+  const offersLayer = new LayerGroup ();
 
-  useEffect(() => {
+  useEffect(():any => {
     if (map) {
+      offersLayer.addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
 
-        marker.setIcon(defaultCustomIcon).addTo(map);
+        marker.setIcon(defaultCustomIcon).addTo(offersLayer);
       });
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
+
+    return () => offersLayer.clearLayers();
   }, [map, offers]);
 
   return (
