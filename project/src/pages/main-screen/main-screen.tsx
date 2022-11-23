@@ -1,23 +1,16 @@
 import { Link } from 'react-router-dom';
 import PlaceCards from '../../components/place-cards/place-cards';
-import {Offer} from '../../types/offer';
 import Map from '../../components/map/map';
 import {cities} from '../../mocks/cities';
 import CitiesList from '../../components/cities-list/cities-list';
-import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {loadOffers} from '../../store/actions';
+import {useAppSelector} from '../../hooks/index';
 import {offersInCity} from '../../utils';
 
-type MainScreenProps = {
-    offers: Offer[];
-}
-
-function MainScreen ({offers}: MainScreenProps):JSX.Element {
-  const dispatch = useAppDispatch();
-  dispatch(loadOffers());
-  const offers1 = useAppSelector((state) => state.offers);
-  const city1 = useAppSelector((state) => state.city);
-  const cityOffers1 = offers1 ? offersInCity(offers1, city1.name).length : '';
+function MainScreen ():JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const city = useAppSelector((state) => state.city);
+  const cityOffersCount = offers ? offersInCity(offers, city.name).length : '';
+  const cityOffers = offers ? offersInCity(offers, city.name) : [];
 
   return (
     <div className="page page--gray page--main">
@@ -70,7 +63,7 @@ function MainScreen ({offers}: MainScreenProps):JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers1} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffersCount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -97,10 +90,10 @@ function MainScreen ({offers}: MainScreenProps):JSX.Element {
                   </li>
                 </ul>
               </form>
-              <PlaceCards offers={offers}/>
+              <PlaceCards offers={cityOffers}/>
             </section>
             <div className="cities__right-section">
-              <Map city={cities[0]} offers={offers}/>
+              <Map city={city} offers={cityOffers}/>
             </div>
           </div>
         </div>
