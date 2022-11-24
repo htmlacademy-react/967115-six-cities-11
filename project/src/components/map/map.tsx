@@ -4,7 +4,6 @@ import {useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
 import { Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {URL_MARKER_DEFAULT} from '../../constants';
 
 type MapProps = {
   city: City;
@@ -12,7 +11,7 @@ type MapProps = {
 }
 
 const defaultCustomIcon = new Icon ({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: 'img/pin.svg',
   iconSize: [27, 39],
   iconAnchor: [14, 19]
 });
@@ -22,7 +21,7 @@ function Map ({city, offers}: MapProps):JSX.Element {
   const map = useMap(city, mapRef);
   const offersLayer = new LayerGroup ();
 
-  useEffect(():any => {
+  useEffect(() => {
     if (map) {
       offersLayer.addTo(map);
       offers.forEach((offer) => {
@@ -36,7 +35,7 @@ function Map ({city, offers}: MapProps):JSX.Element {
       map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
 
-    return () => offersLayer.clearLayers();
+    return () => {offersLayer.clearLayers();};
   }, [map, offers]);
 
   return (
