@@ -11,7 +11,7 @@ function CitiesList ({cities}: CitiesListProps): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
-  const onCityClick = (city: City) => dispatch(changeCity({city: city}));
+  const onCityClick = (city: City) => dispatch(changeCity(city));
 
   return (
     <ul className="locations__list tabs__list">

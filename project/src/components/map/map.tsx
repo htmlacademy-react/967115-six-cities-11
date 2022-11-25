@@ -19,10 +19,11 @@ const defaultCustomIcon = new Icon ({
 function Map ({city, offers}: MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
-  const offersLayer = new LayerGroup ();
 
   useEffect(() => {
+    const offersLayer = new LayerGroup ();
     if (map) {
+      const {latitude, longitude, zoom} = city.location;
       offersLayer.addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -32,11 +33,13 @@ function Map ({city, offers}: MapProps):JSX.Element {
 
         marker.setIcon(defaultCustomIcon).addTo(offersLayer);
       });
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      map.setView([latitude, longitude], zoom);
     }
 
-    return () => {offersLayer.clearLayers();};
-  }, [map, offers]);
+    return () => {
+      offersLayer.clearLayers();
+    };
+  }, [map, offers, city.location]);
 
   return (
     <section

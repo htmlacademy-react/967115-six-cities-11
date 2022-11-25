@@ -5,12 +5,20 @@ import {cities} from '../../mocks/cities';
 import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks/index';
 import {offersInCity} from '../../utils';
+import {useAppDispatch} from '../../hooks/index';
+import {loadOffers} from '../../store/actions';
+import {useEffect} from 'react';
 
 function MainScreen ():JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const city = useAppSelector((state) => state.city);
-  const cityOffersCount = offers ? offersInCity(offers, city.name).length : '';
   const cityOffers = offers ? offersInCity(offers, city.name) : [];
+  const cityOffersCount = cityOffers.length;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadOffers());
+  });
 
   return (
     <div className="page page--gray page--main">

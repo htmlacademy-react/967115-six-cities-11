@@ -7,17 +7,12 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFound404Screen from '../../pages/not-found-404-screen/not-found-404-screen';
 import {Offer} from '../../types/offer';
-import {useAppDispatch} from '../../hooks/index';
-import {loadOffers} from '../../store/actions';
-
 
 type AppScreenProps = {
   offers: Offer[];
 }
 
 function App({offers}: AppScreenProps): JSX.Element {
-  const dispatch = useAppDispatch();
-  dispatch(loadOffers());
 
   return (
     <BrowserRouter>

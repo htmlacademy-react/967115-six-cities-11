@@ -21,7 +21,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = offers;
     })
     .addCase(changeCity, (state, action) => {
-      state.city = action.payload.city;
+      state.city = action.payload;
     });
 });
 
