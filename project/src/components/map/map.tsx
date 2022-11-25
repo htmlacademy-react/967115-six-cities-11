@@ -2,9 +2,8 @@ import {City} from '../../types/city';
 import { Offer } from '../../types/offer';
 import {useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
-import { Icon, Marker } from 'leaflet';
+import { Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {URL_MARKER_DEFAULT} from '../../constants';
 
 type MapProps = {
   city: City;
@@ -12,7 +11,7 @@ type MapProps = {
 }
 
 const defaultCustomIcon = new Icon ({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: 'img/pin.svg',
   iconSize: [27, 39],
   iconAnchor: [14, 19]
 });
@@ -22,17 +21,25 @@ function Map ({city, offers}: MapProps):JSX.Element {
   const map = useMap(city, mapRef);
 
   useEffect(() => {
+    const offersLayer = new LayerGroup ();
     if (map) {
+      const {latitude, longitude, zoom} = city.location;
+      offersLayer.addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
 
-        marker.setIcon(defaultCustomIcon).addTo(map);
+        marker.setIcon(defaultCustomIcon).addTo(offersLayer);
       });
+      map.setView([latitude, longitude], zoom);
     }
-  }, [map, offers]);
+
+    return () => {
+      offersLayer.clearLayers();
+    };
+  }, [map, offers, city.location]);
 
   return (
     <section
