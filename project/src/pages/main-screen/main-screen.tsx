@@ -14,7 +14,6 @@ function MainScreen ():JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const city = useAppSelector((state) => state.city);
   const cityOffers = offers ? offersInCity(offers, city.name) : [];
-  const cityOffersCount = cityOffers.length;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -72,7 +71,7 @@ function MainScreen ():JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
               <SortOptions/>
               <PlaceCards offers={cityOffers}/>
             </section>
