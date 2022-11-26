@@ -16,6 +16,12 @@ const defaultCustomIcon = new Icon ({
   iconAnchor: [14, 19]
 });
 
+const activeCustomIcon = new Icon ({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [27, 39],
+  iconAnchor: [14, 19]
+});
+
 function Map ({city, offers}: MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
