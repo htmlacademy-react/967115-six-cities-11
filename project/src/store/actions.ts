@@ -8,3 +8,5 @@ export const changeCity = createAction<City>('city/change');
 export const displaySortMenu = createAction('sort/openSortMenu');
 
 export const changeSortOption = createAction<string>('sort/changeSortOption');
+
+export const changeActivePlaceCardID = createAction<number>('offer/displayOnMap');
