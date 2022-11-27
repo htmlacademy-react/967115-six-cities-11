@@ -12,7 +12,7 @@ import {SORT_OPTIONS} from '../constants';
 
 type InitialState = {
   city: City;
-  offers: Offer[] | null;
+  offers: Offer[];
   isSortMenuOpened: boolean;
   activeSortOption: string;
   activePlaceCardID: number | null;
@@ -20,7 +20,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   city: cities[0],
-  offers: null,
+  offers: [],
   isSortMenuOpened: false,
   activeSortOption: SORT_OPTIONS[0],
   activePlaceCardID: null
@@ -28,8 +28,8 @@ const initialState: InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadOffers, (state) => {
-      state.offers = offers;
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     })
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
