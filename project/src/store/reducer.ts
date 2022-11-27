@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { offers } from '../mocks/offers';
 import { loadOffers,
   changeCity,
   toggleSortMenu,

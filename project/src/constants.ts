@@ -39,3 +39,7 @@ export const SORT_OPTIONS = [
   SortOptionsValues.PriceHighToLow,
   SortOptionsValues.TopRatedFirst
 ];
+
+export const enum APIRoutes {
+  Offers = '/hotels',
+}
