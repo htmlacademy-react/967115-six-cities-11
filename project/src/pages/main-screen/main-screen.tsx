@@ -6,10 +6,12 @@ import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks/index';
 import {offersInCity} from '../../utils';
 import SortOptions from '../../components/sort-options/sort-options';
+import LoadingOffers from '../../components/loading-offers/loading-offers';
 
 function MainScreen ():JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const city = useAppSelector((state) => state.city);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const cityOffers = offers ? offersInCity(offers, city.name) : [];
 
   return (
@@ -63,9 +65,13 @@ function MainScreen ():JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in {city.name}</b>
               <SortOptions/>
-              <PlaceCards offers={cityOffers}/>
+              {
+                isOffersDataLoading
+                  ? <LoadingOffers/>
+                  : <PlaceCards offers={cityOffers}/>
+              }
             </section>
             <div className="cities__right-section">
               <Map city={city} offers={cityOffers}/>

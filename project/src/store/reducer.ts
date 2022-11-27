@@ -15,6 +15,7 @@ type InitialState = {
   isSortMenuOpened: boolean;
   activeSortOption: string;
   activePlaceCardID: number | null;
+  isOffersDataLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -22,7 +23,8 @@ const initialState: InitialState = {
   offers: [],
   isSortMenuOpened: false,
   activeSortOption: SORT_OPTIONS[0],
-  activePlaceCardID: null
+  activePlaceCardID: null,
+  isOffersDataLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
