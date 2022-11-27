@@ -2,6 +2,7 @@ import {City} from '../../types/city';
 import { Offer } from '../../types/offer';
 import {useEffect, useRef} from 'react';
 import useMap from '../../hooks/use-map';
+import {useAppSelector} from '../../hooks/index';
 import { Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -16,9 +17,16 @@ const defaultCustomIcon = new Icon ({
   iconAnchor: [14, 19]
 });
 
+const activeCustomIcon = new Icon ({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [27, 39],
+  iconAnchor: [14, 19]
+});
+
 function Map ({city, offers}: MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
+  const activePlaceCardID = useAppSelector((state) => state.activePlaceCardID);
 
   useEffect(() => {
     const offersLayer = new LayerGroup ();
@@ -31,7 +39,7 @@ function Map ({city, offers}: MapProps):JSX.Element {
           lng: offer.location.longitude
         });
 
-        marker.setIcon(defaultCustomIcon).addTo(offersLayer);
+        marker.setIcon((offer.id === activePlaceCardID) ? activeCustomIcon : defaultCustomIcon).addTo(offersLayer);
       });
       map.setView([latitude, longitude], zoom);
     }
@@ -39,7 +47,7 @@ function Map ({city, offers}: MapProps):JSX.Element {
     return () => {
       offersLayer.clearLayers();
     };
-  }, [map, offers, city.location]);
+  }, [map, offers, city.location, activePlaceCardID]);
 
   return (
     <section
