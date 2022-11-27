@@ -26,8 +26,7 @@ export const MIN_PLACE_RATING = 1;
 
 export const MAX_PLACE_IMAGES = 6;
 
-// Нужен массив. Достаточно только значений
-export const enum SortOptions {
+export const enum SortOptionsValues {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
   PriceHighToLow = 'Price: high to low',
@@ -35,8 +34,8 @@ export const enum SortOptions {
 }
 
 export const SORT_OPTIONS = [
-  SortOptions.Popular,
-  SortOptions.PriceLowToHigh,
-  SortOptions.PriceHighToLow,
-  SortOptions.TopRatedFirst
+  SortOptionsValues.Popular,
+  SortOptionsValues.PriceLowToHigh,
+  SortOptionsValues.PriceHighToLow,
+  SortOptionsValues.TopRatedFirst
 ];

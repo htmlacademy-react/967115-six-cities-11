@@ -1,6 +1,6 @@
 import {SORT_OPTIONS} from '../../constants';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import { displaySortMenu, changeSortOption } from '../../store/actions';
+import { toggleSortMenu, changeSortOption } from '../../store/actions';
 import cn from 'classnames';
 
 function SortOptions (): JSX.Element {
@@ -10,12 +10,12 @@ function SortOptions (): JSX.Element {
   const dispatch = useAppDispatch();
 
   const onSortMenuClick = () => {
-    dispatch(displaySortMenu());
+    dispatch(toggleSortMenu());
   };
 
   const onSortOptionClick = (option: string) => {
     dispatch(changeSortOption(option));
-    dispatch(displaySortMenu());
+    dispatch(toggleSortMenu());
   };
 
   return (
@@ -41,7 +41,11 @@ function SortOptions (): JSX.Element {
         {
           SORT_OPTIONS.map((option) => (
             <li
-              className="places__option "
+              className={cn(
+                'places__option',
+                {'places__option--active': option === activeSortOption}
+
+              )}
               tabIndex={0}
               key={option}
               onClick={() => onSortOptionClick(option)}
@@ -50,7 +54,6 @@ function SortOptions (): JSX.Element {
             </li>
           ))
         }
-        {/* places__option--active */}
       </ul>
     </form>
   );

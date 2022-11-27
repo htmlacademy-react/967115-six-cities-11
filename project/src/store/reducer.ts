@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
 import { loadOffers,
   changeCity,
-  displaySortMenu,
+  toggleSortMenu,
   changeSortOption,
   changeActivePlaceCardID } from './actions';
 import {City} from '../types/city';
@@ -15,7 +15,7 @@ type InitialState = {
   offers: Offer[] | null;
   isSortMenuOpened: boolean;
   activeSortOption: string;
-  activePlaceCardID: number;
+  activePlaceCardID: number | null;
 }
 
 const initialState: InitialState = {
@@ -23,7 +23,7 @@ const initialState: InitialState = {
   offers: null,
   isSortMenuOpened: false,
   activeSortOption: SORT_OPTIONS[0],
-  activePlaceCardID: -1
+  activePlaceCardID: null
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -34,7 +34,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(displaySortMenu, (state) => {
+    .addCase(toggleSortMenu, (state) => {
       state.isSortMenuOpened = !state.isSortMenuOpened;
     })
     .addCase(changeSortOption, (state, action) => {

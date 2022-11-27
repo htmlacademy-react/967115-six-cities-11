@@ -20,7 +20,7 @@ function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
   };
 
   const handlePlaceCardMouseLeave = (offer: Offer) => {
-    dispatch(changeActivePlaceCardID(-1));
+    dispatch(changeActivePlaceCardID(null));
   };
 
   return (

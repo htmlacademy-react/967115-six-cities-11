@@ -1,5 +1,5 @@
 import { Offer } from './types/offer';
-import {SortOptions} from './constants';
+import {SortOptionsValues} from './constants';
 
 import {MAX_PLACE_RATING} from '../src/constants';
 
@@ -50,11 +50,11 @@ const sortRatingHighToLow = (a: Offer, b: Offer): number => {
 export function sortingByOption (option: string, offers: Offer[]): Offer[] {
   const sortedOffers = offers;
   switch (option) {
-    case SortOptions.PriceLowToHigh:
+    case SortOptionsValues.PriceLowToHigh:
       return sortedOffers.sort(sortPriceLowToHigh);
-    case SortOptions.PriceHighToLow:
+    case SortOptionsValues.PriceHighToLow:
       return sortedOffers.sort(sortPriceHighToLow);
-    case SortOptions.TopRatedFirst:
+    case SortOptionsValues.TopRatedFirst:
       return sortedOffers.sort(sortRatingHighToLow);
     default:
       return offers;
