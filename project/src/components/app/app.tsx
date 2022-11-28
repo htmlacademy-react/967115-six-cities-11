@@ -6,8 +6,15 @@ import PlaceScreen from '../../pages/place-screen/place-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFound404Screen from '../../pages/not-found-404-screen/not-found-404-screen';
+import { store } from '../../store/index';
+import {fetchOffersAction} from '../../store/api-actions';
+import { useEffect } from 'react';
 
 function App(): JSX.Element {
+
+  useEffect(() => {
+    store.dispatch(fetchOffersAction());
+  },[]);
 
   return (
     <BrowserRouter>

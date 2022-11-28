@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { City } from '../types/city';
 import { Offer } from '../types/offer';
 
-export const loadOffers = createAction<Offer[]>('offers/load');
+export const setOffers = createAction<Offer[]>('offers/setOffers');
 
 export const changeCity = createAction<City>('city/change');
 
