@@ -1,24 +1,18 @@
 import { Link } from 'react-router-dom';
 import PlaceCards from '../../components/place-cards/place-cards';
 import Map from '../../components/map/map';
-import {cities} from '../../mocks/cities';
+import { CITIES } from '../../constants';
 import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks/index';
 import {offersInCity} from '../../utils';
-import {useAppDispatch} from '../../hooks/index';
-import {loadOffers} from '../../store/actions';
-import {useEffect} from 'react';
 import SortOptions from '../../components/sort-options/sort-options';
+import LoadingOffers from '../../components/loading-offers/loading-offers';
 
 function MainScreen ():JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const city = useAppSelector((state) => state.city);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const cityOffers = offers ? offersInCity(offers, city.name) : [];
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadOffers());
-  },[dispatch]);
 
   return (
     <div className="page page--gray page--main">
@@ -64,16 +58,20 @@ function MainScreen ():JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={cities}/>
+            <CitiesList cities={CITIES}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in {city.name}</b>
               <SortOptions/>
-              <PlaceCards offers={cityOffers}/>
+              {
+                isOffersDataLoading
+                  ? <LoadingOffers/>
+                  : <PlaceCards offers={cityOffers}/>
+              }
             </section>
             <div className="cities__right-section">
               <Map city={city} offers={cityOffers}/>

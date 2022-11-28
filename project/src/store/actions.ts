@@ -1,12 +1,15 @@
 import { createAction } from '@reduxjs/toolkit';
 import { City } from '../types/city';
+import { Offer } from '../types/offer';
 
-export const loadOffers = createAction('offers/load');
+export const setOffers = createAction<Offer[]>('offers/setOffers');
 
 export const changeCity = createAction<City>('city/change');
 
-export const toggleSortMenu = createAction('sort/openSortMenu');
+export const toggleSortMenu = createAction('sort/toggleSortMenu');
 
 export const changeSortOption = createAction<string>('sort/changeSortOption');
 
 export const changeActivePlaceCardID = createAction<number | null>('offer/displayOnMap');
+
+export const setOffersLoadingStatus = createAction<boolean>('offers/setOffersLoadingStatus');

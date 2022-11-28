@@ -1,35 +1,36 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { offers } from '../mocks/offers';
-import { loadOffers,
+import { setOffers,
   changeCity,
   toggleSortMenu,
   changeSortOption,
   changeActivePlaceCardID } from './actions';
 import {City} from '../types/city';
 import {Offer} from '../types/offer';
-import {cities} from '../mocks/cities';
+import { CITIES } from '../constants';
 import {SORT_OPTIONS} from '../constants';
 
 type InitialState = {
   city: City;
-  offers: Offer[] | null;
+  offers: Offer[];
   isSortMenuOpened: boolean;
   activeSortOption: string;
   activePlaceCardID: number | null;
+  isOffersDataLoading: boolean;
 }
 
 const initialState: InitialState = {
-  city: cities[0],
-  offers: null,
+  city: CITIES[0],
+  offers: [],
   isSortMenuOpened: false,
   activeSortOption: SORT_OPTIONS[0],
-  activePlaceCardID: null
+  activePlaceCardID: null,
+  isOffersDataLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadOffers, (state) => {
-      state.offers = offers;
+    .addCase(setOffers, (state, action) => {
+      state.offers = action.payload;
     })
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
