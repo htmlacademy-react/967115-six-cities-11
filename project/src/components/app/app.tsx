@@ -6,13 +6,8 @@ import PlaceScreen from '../../pages/place-screen/place-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFound404Screen from '../../pages/not-found-404-screen/not-found-404-screen';
-import {Offer} from '../../types/offer';
 
-type AppScreenProps = {
-  offers: Offer[];
-}
-
-function App({offers}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -31,13 +26,13 @@ function App({offers}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatuses.Auth}
             >
-              <FavoritesScreen offers={offers}/>
+              <FavoritesScreen/>
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoutes.Offer}/:id`}
-          element={<PlaceScreen offers={offers} />}
+          element={<PlaceScreen/>}
         />
         <Route
           path={AppRoutes.NotFound}

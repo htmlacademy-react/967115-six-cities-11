@@ -6,7 +6,7 @@ import { loadOffers,
   changeActivePlaceCardID } from './actions';
 import {City} from '../types/city';
 import {Offer} from '../types/offer';
-import {cities} from '../mocks/cities';
+import { CITIES } from '../constants';
 import {SORT_OPTIONS} from '../constants';
 
 type InitialState = {
@@ -19,7 +19,7 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  city: cities[0],
+  city: CITIES[0],
   offers: [],
   isSortMenuOpened: false,
   activeSortOption: SORT_OPTIONS[0],

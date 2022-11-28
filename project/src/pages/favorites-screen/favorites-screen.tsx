@@ -1,15 +1,12 @@
-import {Offer} from '../../types/offer';
-import {Cities} from '../../constants';
+import {CITIES} from '../../constants';
 import {Link} from 'react-router-dom';
 import CityCards from '../../components/city-cards/city-cards';
 import {offersInCity} from '../../utils';
+import {useAppSelector} from '../../hooks/index';
 
-type FavoritesScreenProps = {
-  offers: Offer[];
-}
+function FavoritesScreen (): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
 
-function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
-  const cities = Object.values(Cities);
   return (
     <div className="page">
       <header className="header">
@@ -53,18 +50,18 @@ function FavoritesScreen ({offers}: FavoritesScreenProps): JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {
-                cities.map((city) =>
-                  (offersInCity.length === 0) &&
-                      <li key={city} className="favorites__locations-items">
+                CITIES.map((city) =>
+                  (offersInCity(offers, city.name).length !== 0) &&
+                      <li key={city.name} className="favorites__locations-items">
                         <div className="favorites__locations locations locations--current">
                           <div className="locations__item">
                             <Link className="locations__item-link" to="/">
-                              <span>{city}</span>
+                              <span>{city.name}</span>
                             </Link>
                           </div>
                         </div>
                         <div className="favorites__places">
-                          <CityCards city={city} offers={offers} />
+                          <CityCards city={city.name} offers={offers} />
                         </div>
                       </li>
                 )

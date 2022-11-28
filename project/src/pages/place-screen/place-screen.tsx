@@ -1,15 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
-import {Offer} from '../../types/offer';
 import {MAX_PLACE_IMAGES} from '../../constants';
 import {setStarRating} from '../../utils';
 import ReviewForm from '../../components/review-form/review-form';
+import {useAppSelector} from '../../hooks/index';
 
-type PlaceScreenProps = {
-  offers: Offer[];
-}
-
-function PlaceScreen ({offers}: PlaceScreenProps): JSX.Element {
+function PlaceScreen (): JSX.Element {
   const params = useParams();
+  const offers = useAppSelector((state) => state.offers);
   const offer = params.id
     ? offers.find((item) => item.id.toString() === params.id)
     : null;

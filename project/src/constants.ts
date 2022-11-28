@@ -1,3 +1,5 @@
+import { City } from './types/city';
+
 export enum AppRoutes {
     Login = '/login',
     Favorites = '/favorites',
@@ -12,14 +14,56 @@ export enum AuthorizationStatuses {
     Unknown = 'UNKNOWN'
 }
 
-export const Cities = {
-  Brussels: 'Brussels',
-  Cologne: 'Cologne',
-  Hamburg: 'Hamburg',
-  Paris: 'Paris',
-  Amsterdam: 'Amsterdam',
-  Dusseldorf: 'Dusseldorf'
-};
+export const CITIES: City[] = [
+  {
+    name: 'Paris',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
+    },
+  },
+  {
+    name: 'Cologne',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
+    },
+  },
+  {
+    name: 'Brussels',
+    location: {
+      latitude: 50.846557,
+      longitude: 4.351697,
+      zoom: 13
+    },
+  },
+  {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
+    },
+  },
+  {
+    name: 'Hamburg',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
+    },
+  },
+  {
+    name: 'Dusseldorf',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 11
+    },
+  },
+];
 
 export const MAX_PLACE_RATING = 5;
 export const MIN_PLACE_RATING = 1;
