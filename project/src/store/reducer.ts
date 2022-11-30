@@ -3,11 +3,12 @@ import { setOffers,
   changeCity,
   toggleSortMenu,
   changeSortOption,
-  changeActivePlaceCardID } from './actions';
+  changeActivePlaceCardID,
+  setAuthorizationStatus } from './actions';
 import {City} from '../types/city';
 import {Offer} from '../types/offer';
 import { CITIES } from '../constants';
-import {SORT_OPTIONS} from '../constants';
+import {SORT_OPTIONS, AuthorizationStatus} from '../constants';
 
 type InitialState = {
   city: City;
@@ -16,6 +17,7 @@ type InitialState = {
   activeSortOption: string;
   activePlaceCardID: number | null;
   isOffersDataLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
 }
 
 const initialState: InitialState = {
@@ -24,7 +26,8 @@ const initialState: InitialState = {
   isSortMenuOpened: false,
   activeSortOption: SORT_OPTIONS[0],
   activePlaceCardID: null,
-  isOffersDataLoading: false
+  isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -43,6 +46,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeActivePlaceCardID, (state, action) => {
       state.activePlaceCardID = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
