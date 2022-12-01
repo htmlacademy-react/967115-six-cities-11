@@ -6,7 +6,7 @@ import { AuthData } from '../types/auth-data';
 import { AuthInfo } from '../types/auth-info';
 import { APIRoutes, AuthorizationStatus } from '../constants';
 import { setOffers, setOffersLoadingStatus, setAuthorizationStatus } from './actions';
-import { saveToken } from '../services/token';
+import { saveToken, dropToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -49,4 +49,17 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
   }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/logout',
+  async (_arg, {dispatch, extra: api}) => {
+    await api.delete(APIRoutes.Logout);
+    dropToken();
+    dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
+  },
 );
