@@ -8,7 +8,7 @@ import { setOffers,
 import {City} from '../types/city';
 import {Offer} from '../types/offer';
 import { CITIES } from '../constants';
-import {SORT_OPTIONS, AuthorizationStatus} from '../constants';
+import {SORT_OPTIONS, AuthorizationStatuses} from '../constants';
 
 type InitialState = {
   city: City;
@@ -17,7 +17,7 @@ type InitialState = {
   activeSortOption: string;
   activePlaceCardID: number | null;
   isOffersDataLoading: boolean;
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AuthorizationStatuses;
 }
 
 const initialState: InitialState = {
@@ -27,7 +27,7 @@ const initialState: InitialState = {
   activeSortOption: SORT_OPTIONS[0],
   activePlaceCardID: null,
   isOffersDataLoading: false,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatuses.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
