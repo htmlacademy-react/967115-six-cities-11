@@ -4,9 +4,15 @@ import {setStarRating} from '../../utils';
 import ReviewForm from '../../components/review-form/review-form';
 import UserNavigation from '../../components/user-navigation/user-navigation';
 import {useAppSelector} from '../../hooks/index';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
+
+  // По заданию нужно сделать отдельный запрос за данными об объявлении.
+  // Затем нужно сделать отдельный запрос по комментариям
+  // Для обоих запросов нужно сделать асинхронные действия
+
   const offers = useAppSelector((state) => state.offers);
   const offer = params.id
     ? offers.find((item) => item.id.toString() === params.id)
@@ -127,39 +133,8 @@ function PlaceScreen (): JSX.Element {
                 <h2 className="reviews__title">
                     Reviews · <span className="reviews__amount">1</span>
                 </h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img
-                          className="reviews__avatar user__avatar"
-                          src="img/avatar-max.jpg"
-                          width={54}
-                          height={54}
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">Max</span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                            A quiet cozy and picturesque that hides behind a a river by
-                            the unique lightness of Amsterdam. The building is green and
-                            from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">
-                            April 2019
-                      </time>
-                    </div>
-                  </li>
-                </ul>
-                <ReviewForm />
+                <ReviewsList/>
+                <ReviewForm/>
               </section>
             </div>
           </div>
