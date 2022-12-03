@@ -1,22 +1,22 @@
 import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import {MAX_PLACE_IMAGES} from '../../constants';
 import {setStarRating} from '../../utils';
 import ReviewForm from '../../components/review-form/review-form';
 import UserNavigation from '../../components/user-navigation/user-navigation';
 import {useAppSelector} from '../../hooks/index';
 import ReviewsList from '../../components/reviews-list/reviews-list';
+import { store } from '../../store';
+import { fetchCurrentOfferAction } from '../../store/api-actions';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
+  const offer = useAppSelector((state) => state.currentOffer);
 
-  // По заданию нужно сделать отдельный запрос за данными об объявлении.
-  // Затем нужно сделать отдельный запрос по комментариям
-  // Для обоих запросов нужно сделать асинхронные действия
+  useEffect(() => {
+    if (params.id) {store.dispatch(fetchCurrentOfferAction(+params.id));}
+  }, [params.id]);
 
-  const offers = useAppSelector((state) => state.offers);
-  const offer = params.id
-    ? offers.find((item) => item.id.toString() === params.id)
-    : null;
   return (
     <div className="page">
       <header className="header">

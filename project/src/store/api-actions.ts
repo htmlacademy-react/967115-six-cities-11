@@ -5,7 +5,11 @@ import { Offer } from '../types/offer';
 import { AuthData } from '../types/auth-data';
 import { AuthInfo } from '../types/auth-info';
 import { APIRoutes, AuthorizationStatuses } from '../constants';
-import { setOffers, setOffersLoadingStatus, setAuthorizationStatus } from './actions';
+import { setOffers,
+  setOffersLoadingStatus,
+  setAuthorizationStatus,
+  setCurrentOffer,
+  setCurrentOfferLoadingStatus } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -13,12 +17,26 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'offers/fetch',
+  'offer/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoutes.Offers);
     dispatch(setOffersLoadingStatus(false));
     dispatch(setOffers(data));
+  }
+);
+
+export const fetchCurrentOfferAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offer/fetchCurrentOffer',
+  async (offerID, {dispatch, extra: api}) => {
+    dispatch(setCurrentOfferLoadingStatus(true));
+    const {data} = await api.get<Offer>(`${APIRoutes.Offers}/${offerID}`);
+    dispatch(setCurrentOfferLoadingStatus(false));
+    dispatch(setCurrentOffer(data));
   }
 );
 

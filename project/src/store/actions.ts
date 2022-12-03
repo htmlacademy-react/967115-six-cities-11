@@ -15,4 +15,8 @@ export const changeActivePlaceCardID = createAction<number | null>('offer/displa
 
 export const setOffersLoadingStatus = createAction<boolean>('offers/setOffersLoadingStatus');
 
+export const setCurrentOfferLoadingStatus = createAction<boolean>('offers/setCurrentOfferLoadingStatus');
+
 export const setAuthorizationStatus = createAction<AuthorizationStatuses>('user/setAuthorizationStatus');
+
+export const setCurrentOffer = createAction<Offer>('offers/setCurrentOffer');
