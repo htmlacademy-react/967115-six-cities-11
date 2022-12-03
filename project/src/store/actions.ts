@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { City } from '../types/city';
 import { Offer } from '../types/offer';
+import { Review } from '../types/review';
 import { AuthorizationStatuses } from '../constants';
 
 export const setOffers = createAction<Offer[]>('offers/setOffers');
@@ -20,3 +21,7 @@ export const setCurrentOfferLoadingStatus = createAction<boolean>('offers/setCur
 export const setAuthorizationStatus = createAction<AuthorizationStatuses>('user/setAuthorizationStatus');
 
 export const setCurrentOffer = createAction<Offer>('offers/setCurrentOffer');
+
+export const setReviews = createAction<Review[]>('reviews/setReviews');
+
+export const setReviewsLoadingStatus = createAction<boolean>('comments/setReviewsLoadingStatus');

@@ -7,14 +7,18 @@ import UserNavigation from '../../components/user-navigation/user-navigation';
 import {useAppSelector} from '../../hooks/index';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import { store } from '../../store';
-import { fetchCurrentOfferAction } from '../../store/api-actions';
+import { fetchCurrentOfferAction, fetchReviewsAction } from '../../store/api-actions';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
   const offer = useAppSelector((state) => state.currentOffer);
+  const reviews = useAppSelector((state) => state.reviews);
 
   useEffect(() => {
-    if (params.id) {store.dispatch(fetchCurrentOfferAction(+params.id));}
+    if (params.id) {
+      store.dispatch(fetchCurrentOfferAction(+params.id));
+      store.dispatch(fetchReviewsAction(+params.id));
+    }
   }, [params.id]);
 
   return (
@@ -131,9 +135,9 @@ function PlaceScreen (): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">
-                    Reviews · <span className="reviews__amount">1</span>
+                    Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList/>
+                <ReviewsList reviews={reviews}/>
                 <ReviewForm/>
               </section>
             </div>

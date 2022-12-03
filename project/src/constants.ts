@@ -86,7 +86,7 @@ export const SORT_OPTIONS = [
 
 export const enum APIRoutes {
   Offers = '/hotels',
-  Offer = '/hotels/22',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comments = '/comments'
 }

@@ -1,11 +1,14 @@
 import { Offer } from './types/offer';
 import {SortOptionsValues} from './constants';
+import dayjs from 'dayjs';
 
 import {MAX_PLACE_RATING} from '../src/constants';
 
 export function setStarRating (rating: number): number {
   return (Math.round(rating) * 100 / MAX_PLACE_RATING);
 }
+
+export const getMonthYearFromDate = (date: string) => dayjs(date).format('MMMM YYYY');
 
 export function offersInCity (offers: Offer[], city: string): Offer[] {
   return offers.filter((offer) => offer.city.name === city);

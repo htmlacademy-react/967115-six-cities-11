@@ -7,9 +7,12 @@ import { setOffers,
   setAuthorizationStatus,
   setCurrentOffer,
   setOffersLoadingStatus,
-  setCurrentOfferLoadingStatus } from './actions';
+  setCurrentOfferLoadingStatus,
+  setReviews,
+  setReviewsLoadingStatus } from './actions';
 import {City} from '../types/city';
 import {Offer} from '../types/offer';
+import { Review } from '../types/review';
 import { CITIES } from '../constants';
 import {SORT_OPTIONS, AuthorizationStatuses} from '../constants';
 
@@ -23,6 +26,8 @@ type InitialState = {
   isOffersDataLoading: boolean;
   isCurrentOfferDataLoadint: boolean;
   authorizationStatus: AuthorizationStatuses;
+  reviews: Review[];
+  isReviewsDataLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -34,7 +39,9 @@ const initialState: InitialState = {
   activePlaceCardID: null,
   isOffersDataLoading: false,
   isCurrentOfferDataLoadint: false,
-  authorizationStatus: AuthorizationStatuses.Unknown
+  authorizationStatus: AuthorizationStatuses.Unknown,
+  reviews: [],
+  isReviewsDataLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -65,9 +72,13 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCurrentOfferLoadingStatus, (state, action) => {
       state.isCurrentOfferDataLoadint = action.payload;
-    }
-
-    );
+    })
+    .addCase(setReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(setReviewsLoadingStatus, (state, action) => {
+      state.isReviewsDataLoading = action.payload;
+    });
 });
 
 export {reducer};

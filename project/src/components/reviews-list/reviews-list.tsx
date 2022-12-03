@@ -1,9 +1,18 @@
-import Review from '../review/review';
+import Comment from '../comment/comment';
+import {Review} from '../../types/review';
 
-function ReviewsList (): JSX.Element {
+type ReviewListProps = {
+  reviews: Review[];
+}
+
+
+function ReviewsList ({reviews}: ReviewListProps): JSX.Element {
+
   return (
     <ul className="reviews__list">
-      <Review/>
+      {
+        reviews.map((review) => <Comment key={review.id} review={review}/>)
+      }
     </ul>
   );
 }
