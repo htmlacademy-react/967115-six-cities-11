@@ -7,17 +7,20 @@ import UserNavigation from '../../components/user-navigation/user-navigation';
 import {useAppSelector} from '../../hooks/index';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import { store } from '../../store';
-import { fetchCurrentOfferAction, fetchReviewsAction } from '../../store/api-actions';
+import { fetchCurrentOfferAction, fetchReviewsAction, fetchNearbyOffersAction } from '../../store/api-actions';
+import Map from '../../components/map/map';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
   const offer = useAppSelector((state) => state.currentOffer);
   const reviews = useAppSelector((state) => state.reviews);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
   useEffect(() => {
     if (params.id) {
       store.dispatch(fetchCurrentOfferAction(+params.id));
       store.dispatch(fetchReviewsAction(+params.id));
+      store.dispatch(fetchNearbyOffersAction(+params.id));
     }
   }, [params.id]);
 
@@ -142,7 +145,9 @@ function PlaceScreen (): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+            <Map city={offer.city} offers={nearbyOffers}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">

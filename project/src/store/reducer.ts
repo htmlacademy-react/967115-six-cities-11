@@ -9,7 +9,9 @@ import { setOffers,
   setOffersLoadingStatus,
   setCurrentOfferLoadingStatus,
   setReviews,
-  setReviewsLoadingStatus } from './actions';
+  setReviewsLoadingStatus,
+  setNearbyOffers,
+  setNearbyOffersLoadingStatus } from './actions';
 import {City} from '../types/city';
 import {Offer} from '../types/offer';
 import { Review } from '../types/review';
@@ -28,6 +30,8 @@ type InitialState = {
   authorizationStatus: AuthorizationStatuses;
   reviews: Review[];
   isReviewsDataLoading: boolean;
+  nearbyOffers: Offer[];
+  isNearbyOffersDataLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -41,7 +45,9 @@ const initialState: InitialState = {
   isCurrentOfferDataLoadint: false,
   authorizationStatus: AuthorizationStatuses.Unknown,
   reviews: [],
-  isReviewsDataLoading: false
+  isReviewsDataLoading: false,
+  nearbyOffers: [],
+  isNearbyOffersDataLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -78,6 +84,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setReviewsLoadingStatus, (state, action) => {
       state.isReviewsDataLoading = action.payload;
+    })
+    .addCase(setNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(setNearbyOffersLoadingStatus, (state, action) => {
+      state.isNearbyOffersDataLoading = action.payload;
     });
 });
 

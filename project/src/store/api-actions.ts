@@ -12,7 +12,9 @@ import { setOffers,
   setCurrentOffer,
   setCurrentOfferLoadingStatus,
   setReviews,
-  setReviewsLoadingStatus } from './actions';
+  setReviewsLoadingStatus,
+  setNearbyOffers,
+  setNearbyOffersLoadingStatus } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -54,6 +56,20 @@ export const fetchReviewsAction = createAsyncThunk<void, number, {
     const {data} = await api.get<Review[]>(`${APIRoutes.Comments}/${offerID}`);
     dispatch(setReviewsLoadingStatus(false));
     dispatch(setReviews(data));
+  }
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offers/fetchNearbyOffers',
+  async (offerID, {dispatch, extra: api}) => {
+    dispatch(setNearbyOffersLoadingStatus(true));
+    const {data} = await api.get<Offer[]>(`${APIRoutes.Offers}/${offerID}/nearby`);
+    dispatch(setNearbyOffersLoadingStatus(false));
+    dispatch(setNearbyOffers(data));
   }
 );
 
