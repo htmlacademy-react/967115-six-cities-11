@@ -3,13 +3,15 @@ import {Offer} from '../../types/offer';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {sortingByOption} from '../../utils';
 import { changeActivePlaceCardID } from '../../store/actions';
+import cn from 'classnames';
 
 
 type PlaceCardsProps = {
   offers: Offer[];
+  isNearby: boolean;
 }
 
-function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
+function PlaceCards ({offers, isNearby}: PlaceCardsProps):JSX.Element {
   const activeSortOption = useAppSelector((state) => state.activeSortOption);
   const dispatch = useAppDispatch();
 
@@ -25,7 +27,12 @@ function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
 
   return (
     <div
-      className="cities__places-list places__list tabs__content"
+      className={cn(
+        'places__list',
+        {'cities__places-list': !isNearby},
+        {'tabs__content': !isNearby},
+        {'near-places__list': isNearby}
+      )}
     >
       {sortedOffers.map((offer) =>
         (
@@ -34,6 +41,7 @@ function PlaceCards ({offers}: PlaceCardsProps):JSX.Element {
             key={offer.id}
             handlePlaceCardMouseEnter={handlePlaceCardMouseEnter}
             handlePlaceCardMouseLeave={handlePlaceCardMouseLeave}
+            isNearby={isNearby}
           />
         ))}
     </div>
