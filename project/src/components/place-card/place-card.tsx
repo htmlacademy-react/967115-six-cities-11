@@ -1,14 +1,21 @@
 import {Offer} from '../../types/offer';
 import {setStarRating} from '../../utils';
 import {Link} from 'react-router-dom';
+import cn from 'classnames';
 
 type PlaceCardProps = {
   offer: Offer;
   handlePlaceCardMouseEnter: (offer: Offer) => void;
   handlePlaceCardMouseLeave: (offer: Offer) => void;
+  isNearby: boolean;
 }
 
-function PlaceCard ({offer, handlePlaceCardMouseEnter, handlePlaceCardMouseLeave}: PlaceCardProps): JSX.Element {
+function PlaceCard ({
+  offer,
+  handlePlaceCardMouseEnter,
+  handlePlaceCardMouseLeave,
+  isNearby}: PlaceCardProps): JSX.Element {
+
   const {
     isPremium,
     previewImage,
@@ -20,15 +27,25 @@ function PlaceCard ({offer, handlePlaceCardMouseEnter, handlePlaceCardMouseLeave
 
   return (
     <article
-      className="cities__card place-card"
-      onMouseEnter={() => {handlePlaceCardMouseEnter(offer);}}
-      onMouseLeave={() => {handlePlaceCardMouseLeave(offer);}}
+      className={cn(
+        'place-card',
+        {'cities__card': !isNearby},
+        {'near-places__card': isNearby}
+      )}
+      onMouseEnter={!isNearby ? () => handlePlaceCardMouseEnter(offer) : undefined}
+      onMouseLeave={!isNearby ? () => handlePlaceCardMouseLeave(offer) : undefined}
     >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div
+        className={cn(
+          'place-card__image-wrapper',
+          {'cities__image-wrapper': !isNearby},
+          {'near-places__image-wrapper': isNearby}
+        )}
+      >
         <Link to={`../offer/${offer.id}`} >
           <img
             className="place-card__image"

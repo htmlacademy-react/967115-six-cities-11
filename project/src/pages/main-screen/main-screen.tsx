@@ -51,7 +51,7 @@ function MainScreen ():JSX.Element {
               {
                 isOffersDataLoading
                   ? <LoadingOffers/>
-                  : <PlaceCards offers={cityOffers}/>
+                  : <PlaceCards offers={cityOffers} isNearby={false}/>
               }
             </section>
             <div className="cities__right-section">
