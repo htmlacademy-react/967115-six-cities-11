@@ -32,8 +32,8 @@ function PlaceCard ({
         {'cities__card': !isNearby},
         {'near-places__card': isNearby}
       )}
-      onMouseEnter={!isNearby ? () => {handlePlaceCardMouseEnter(offer);} : undefined}
-      onMouseLeave={!isNearby ? () => {handlePlaceCardMouseLeave(offer);} : undefined}
+      onMouseEnter={!isNearby ? () => handlePlaceCardMouseEnter(offer) : undefined}
+      onMouseLeave={!isNearby ? () => handlePlaceCardMouseLeave(offer) : undefined}
     >
       {isPremium &&
         <div className="place-card__mark">

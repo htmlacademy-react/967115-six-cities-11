@@ -26,7 +26,7 @@ type InitialState = {
   activeSortOption: string;
   activePlaceCardID: number | null;
   isOffersDataLoading: boolean;
-  isCurrentOfferDataLoadint: boolean;
+  isCurrentOfferDataLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
   reviews: Review[];
   isReviewsDataLoading: boolean;
@@ -42,7 +42,7 @@ const initialState: InitialState = {
   activeSortOption: SORT_OPTIONS[0],
   activePlaceCardID: null,
   isOffersDataLoading: false,
-  isCurrentOfferDataLoadint: false,
+  isCurrentOfferDataLoading: false,
   authorizationStatus: AuthorizationStatuses.Unknown,
   reviews: [],
   isReviewsDataLoading: false,
@@ -77,7 +77,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.isOffersDataLoading = action.payload;
     })
     .addCase(setCurrentOfferLoadingStatus, (state, action) => {
-      state.isCurrentOfferDataLoadint = action.payload;
+      state.isCurrentOfferDataLoading = action.payload;
     })
     .addCase(setReviews, (state, action) => {
       state.reviews = action.payload;
