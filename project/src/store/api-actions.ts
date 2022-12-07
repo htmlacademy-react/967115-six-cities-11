@@ -6,10 +6,9 @@ import { Review } from '../types/review';
 import { AuthData } from '../types/auth-data';
 import { AuthInfo } from '../types/auth-info';
 import { SentReview } from '../types/sent-review';
-import { APIRoutes, AuthorizationStatuses } from '../constants';
+import { APIRoutes } from '../constants';
 import { setOffers,
   setOffersLoadingStatus,
-  setAuthorizationStatus,
   setCurrentOffer,
   setCurrentOfferLoadingStatus,
   setReviews,
@@ -87,12 +86,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkLogin',
   async (_arg, {dispatch, extra: api}) => {
-    try {
-      await api.get(APIRoutes.Login);
-      dispatch(setAuthorizationStatus(AuthorizationStatuses.Auth));
-    } catch {
-      dispatch(setAuthorizationStatus(AuthorizationStatuses.NoAuth));
-    }
+    await api.get(APIRoutes.Login);
   }
 );
 
@@ -105,7 +99,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data: {token}} = await api.post<AuthInfo>(APIRoutes.Login, {email, password});
     saveToken(token);
-    dispatch(setAuthorizationStatus(AuthorizationStatuses.Auth));
   }
 );
 
@@ -129,6 +122,5 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoutes.Logout);
     dropToken();
-    dispatch(setAuthorizationStatus(AuthorizationStatuses.NoAuth));
   },
 );

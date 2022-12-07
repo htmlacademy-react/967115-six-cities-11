@@ -17,7 +17,7 @@ import {City} from '../types/city';
 import {Offer} from '../types/offer';
 import { Review } from '../types/review';
 import { CITIES } from '../constants';
-import {SORT_OPTIONS, AuthorizationStatuses} from '../constants';
+import {SORT_OPTIONS} from '../constants';
 
 type InitialState = {
   city: City;
@@ -28,7 +28,6 @@ type InitialState = {
   activePlaceCardID: number | null;
   isOffersDataLoading: boolean;
   isCurrentOfferDataLoading: boolean;
-  authorizationStatus: AuthorizationStatuses;
   reviews: Review[];
   isReviewsDataLoading: boolean;
   nearbyOffers: Offer[];
@@ -45,7 +44,6 @@ const initialState: InitialState = {
   activePlaceCardID: null,
   isOffersDataLoading: false,
   isCurrentOfferDataLoading: false,
-  authorizationStatus: AuthorizationStatuses.Unknown,
   reviews: [],
   isReviewsDataLoading: false,
   nearbyOffers: [],
@@ -69,9 +67,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeActivePlaceCardID, (state, action) => {
       state.activePlaceCardID = action.payload;
-    })
-    .addCase(setAuthorizationStatus, (state, action) => {
-      state.authorizationStatus = action.payload;
     })
     .addCase(setCurrentOffer, (state, action) => {
       state.currentOffer = action.payload;
