@@ -14,7 +14,8 @@ import { setOffers,
   setReviews,
   setReviewsLoadingStatus,
   setNearbyOffers,
-  setNearbyOffersLoadingStatus } from './actions';
+  setNearbyOffersLoadingStatus,
+  setError} from './actions';
 import { saveToken, dropToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -38,10 +39,15 @@ export const fetchCurrentOfferAction = createAsyncThunk<void, number, {
 }>(
   'offer/fetchCurrentOffer',
   async (offerID, {dispatch, extra: api}) => {
-    dispatch(setCurrentOfferLoadingStatus(true));
-    const {data} = await api.get<Offer>(`${APIRoutes.Offers}/${offerID}`);
-    dispatch(setCurrentOfferLoadingStatus(false));
-    dispatch(setCurrentOffer(data));
+    try {
+      dispatch(setCurrentOfferLoadingStatus(true));
+      const {data} = await api.get<Offer>(`${APIRoutes.Offers}/${offerID}`);
+      dispatch(setCurrentOfferLoadingStatus(false));
+      dispatch(setError(false));
+      dispatch(setCurrentOffer(data));
+    } catch {
+      dispatch(setError(true));
+    }
   }
 );
 

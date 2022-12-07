@@ -29,3 +29,5 @@ export const setReviewsLoadingStatus = createAction<boolean>('comments/setReview
 export const setNearbyOffers = createAction<Offer[]>('offers/setNearbyOffers ');
 
 export const setNearbyOffersLoadingStatus = createAction<boolean>('offers/setNearbyOffersLoadingStatus');
+
+export const setError = createAction<boolean>('offers/setError');

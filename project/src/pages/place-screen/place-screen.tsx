@@ -10,12 +10,14 @@ import { store } from '../../store';
 import { fetchCurrentOfferAction, fetchReviewsAction, fetchNearbyOffersAction } from '../../store/api-actions';
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
+import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
   const offer = useAppSelector((state) => state.currentOffer);
   const reviews = useAppSelector((state) => state.reviews);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const error = useAppSelector((state) => state.error);
 
   useEffect(() => {
     if (params.id) {
@@ -24,6 +26,10 @@ function PlaceScreen (): JSX.Element {
       store.dispatch(fetchNearbyOffersAction(+params.id));
     }
   }, [params.id]);
+
+  if (error) {
+    return <NotFound404Screen/>;
+  }
 
   return (
     <div className="page">
