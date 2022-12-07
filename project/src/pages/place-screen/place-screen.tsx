@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, } from 'react-router-dom';
 import { useEffect } from 'react';
 import {MAX_PLACE_IMAGES} from '../../constants';
 import {setStarRating} from '../../utils';
@@ -6,7 +6,7 @@ import UserNavigation from '../../components/user-navigation/user-navigation';
 import {useAppSelector} from '../../hooks/index';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import { store } from '../../store/index';
-import { fetchCurrentOfferAction, fetchReviewsAction, fetchNearbyOffersAction } from '../../store/api-actions';
+import { fetchCurrentOfferAction, fetchNearbyOffersAction } from '../../store/api-actions';
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
 import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
@@ -21,7 +21,6 @@ function PlaceScreen (): JSX.Element {
   useEffect(() => {
     if (params.id) {
       store.dispatch(fetchCurrentOfferAction(+params.id));
-      store.dispatch(fetchReviewsAction(+params.id));
       store.dispatch(fetchNearbyOffersAction(+params.id));
     }
   }, [params.id]);
@@ -146,7 +145,7 @@ function PlaceScreen (): JSX.Element {
                 <h2 className="reviews__title">
                     Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList reviews={reviews} offerID={offer.id}/>
+                <ReviewsList offerID={offer.id}/>
               </section>
             </div>
           </div>
@@ -160,7 +159,6 @@ function PlaceScreen (): JSX.Element {
                 Other places in the neighbourhood
             </h2>
             <PlaceCards offers={nearbyOffers} isNearby/>
-
           </section>
         </div>
       </main>}

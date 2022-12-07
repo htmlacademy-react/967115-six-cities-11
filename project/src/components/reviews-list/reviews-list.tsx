@@ -1,14 +1,22 @@
 import Comment from '../comment/comment';
-import {Review} from '../../types/review';
 import ReviewForm from '../review-form/review-form';
+import {store} from '../../store/index';
+import {useAppSelector} from '../../hooks/index';
+import {useEffect} from 'react';
+import {fetchReviewsAction} from '../../store/api-actions';
+import {AuthorizationStatuses} from '../../constants';
 
 type ReviewListProps = {
-  reviews: Review[];
   offerID: number;
 }
 
+function ReviewsList ({offerID}: ReviewListProps): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+  const AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-function ReviewsList ({reviews, offerID}: ReviewListProps): JSX.Element {
+  useEffect(() => {
+    store.dispatch(fetchReviewsAction(offerID));
+  });
 
   return (
     <>
@@ -17,7 +25,9 @@ function ReviewsList ({reviews, offerID}: ReviewListProps): JSX.Element {
           reviews.map((review) => <Comment key={review.id} review={review}/>)
         }
       </ul>
-      <ReviewForm offerID={offerID}/>
+      {
+        AuthorizationStatus === AuthorizationStatuses.Auth && <ReviewForm offerID={offerID}/>
+      }
     </>
   );
 }
