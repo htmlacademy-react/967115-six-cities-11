@@ -7,15 +7,15 @@ import {fetchReviewsAction} from '../../store/api-actions';
 import {AuthorizationStatuses} from '../../constants';
 
 type ReviewListProps = {
-  offerID: number;
+  offerId: number;
 }
 
-function ReviewsList ({offerID}: ReviewListProps): JSX.Element {
+function ReviewsList ({offerId}: ReviewListProps): JSX.Element {
   const reviews = useAppSelector((state) => state.reviews);
-  const AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   useEffect(() => {
-    store.dispatch(fetchReviewsAction(offerID));
+    store.dispatch(fetchReviewsAction(offerId));
   });
 
   return (
@@ -26,7 +26,7 @@ function ReviewsList ({offerID}: ReviewListProps): JSX.Element {
         }
       </ul>
       {
-        AuthorizationStatus === AuthorizationStatuses.Auth && <ReviewForm offerID={offerID}/>
+        authorizationStatus === AuthorizationStatuses.Auth && <ReviewForm offerId={offerId}/>
       }
     </>
   );

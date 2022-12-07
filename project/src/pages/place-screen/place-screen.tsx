@@ -145,7 +145,7 @@ function PlaceScreen (): JSX.Element {
                 <h2 className="reviews__title">
                     Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList offerID={offer.id}/>
+                <ReviewsList offerId={offer.id}/>
               </section>
             </div>
           </div>

@@ -4,10 +4,10 @@ import {fetchReviewsAction, sendReviewAction} from '../../store/api-actions';
 import {store} from '../../store/index';
 
 type ReviewFormProps = {
-  offerID: number;
+  offerId: number;
 }
 
-function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
+function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
   const [formData, setFormData] = useState({
     rating: 0,
     comment: ''
@@ -55,8 +55,8 @@ function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    store.dispatch(sendReviewAction([formData, offerID]));
-    store.dispatch(fetchReviewsAction(offerID));
+    store.dispatch(sendReviewAction([formData, offerId]));
+    store.dispatch(fetchReviewsAction(offerId));
     setFormData({
       rating: 0,
       comment: ''
