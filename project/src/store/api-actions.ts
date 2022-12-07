@@ -5,6 +5,7 @@ import { Offer } from '../types/offer';
 import { Review } from '../types/review';
 import { AuthData } from '../types/auth-data';
 import { AuthInfo } from '../types/auth-info';
+import { SentReview } from '../types/sent-review';
 import { APIRoutes, AuthorizationStatuses } from '../constants';
 import { setOffers,
   setOffersLoadingStatus,
@@ -105,6 +106,17 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<AuthInfo>(APIRoutes.Login, {email, password});
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthorizationStatuses.Auth));
+  }
+);
+
+export const sendReviewAction = createAsyncThunk<void, [SentReview, number], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'reviews/sendReview',
+  async ([{comment, rating}, offerID], {dispatch, extra: api}) => {
+    await api.post<Review>(`${APIRoutes.Comments}/${offerID}`, {comment, rating});
   }
 );
 

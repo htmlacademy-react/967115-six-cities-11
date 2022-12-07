@@ -1,7 +1,13 @@
-import {useState, ChangeEvent, Fragment} from 'react';
+import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
 import {MAX_PLACE_RATING} from '../../constants';
+import {fetchReviewsAction, sendReviewAction} from '../../store/api-actions';
+import {store} from '../../store/index';
 
-function ReviewForm () {
+type ReviewFormProps = {
+  offerID: number;
+}
+
+function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
   const [formData, setFormData] = useState({
     rating: '',
     comment: ''
@@ -47,8 +53,22 @@ function ReviewForm () {
     );
   };
 
+  const testFormData = {
+    comment: 'bla bla',
+    rating: 4
+  };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    store.dispatch(sendReviewAction([testFormData, offerID]));
+    store.dispatch(fetchReviewsAction(offerID));
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
             Your review
       </label>
@@ -75,7 +95,7 @@ function ReviewForm () {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          // disabled
         >
             Submit
         </button>

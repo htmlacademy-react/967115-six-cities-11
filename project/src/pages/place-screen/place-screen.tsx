@@ -2,11 +2,10 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import {MAX_PLACE_IMAGES} from '../../constants';
 import {setStarRating} from '../../utils';
-import ReviewForm from '../../components/review-form/review-form';
 import UserNavigation from '../../components/user-navigation/user-navigation';
 import {useAppSelector} from '../../hooks/index';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { store } from '../../store';
+import { store } from '../../store/index';
 import { fetchCurrentOfferAction, fetchReviewsAction, fetchNearbyOffersAction } from '../../store/api-actions';
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
@@ -147,8 +146,8 @@ function PlaceScreen (): JSX.Element {
                 <h2 className="reviews__title">
                     Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList reviews={reviews}/>
-                <ReviewForm/>
+                <ReviewsList reviews={reviews} offerID={offer.id}/>
+                {/* <ReviewForm offerID={offer.id}/> */}
               </section>
             </div>
           </div>
