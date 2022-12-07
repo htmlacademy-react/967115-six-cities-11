@@ -1,19 +1,34 @@
 import Comment from '../comment/comment';
-import {Review} from '../../types/review';
+import ReviewForm from '../review-form/review-form';
+import {store} from '../../store/index';
+import {useAppSelector} from '../../hooks/index';
+import {useEffect} from 'react';
+import {fetchReviewsAction} from '../../store/api-actions';
+import {AuthorizationStatuses} from '../../constants';
 
 type ReviewListProps = {
-  reviews: Review[];
+  offerID: number;
 }
 
+function ReviewsList ({offerID}: ReviewListProps): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+  const AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-function ReviewsList ({reviews}: ReviewListProps): JSX.Element {
+  useEffect(() => {
+    store.dispatch(fetchReviewsAction(offerID));
+  });
 
   return (
-    <ul className="reviews__list">
+    <>
+      <ul className="reviews__list">
+        {
+          reviews.map((review) => <Comment key={review.id} review={review}/>)
+        }
+      </ul>
       {
-        reviews.map((review) => <Comment key={review.id} review={review}/>)
+        AuthorizationStatus === AuthorizationStatuses.Auth && <ReviewForm offerID={offerID}/>
       }
-    </ul>
+    </>
   );
 }
 
