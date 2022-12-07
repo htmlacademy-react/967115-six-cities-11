@@ -9,7 +9,7 @@ type ReviewFormProps = {
 
 function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
   const [formData, setFormData] = useState({
-    rating: '',
+    rating: 0,
     comment: ''
   });
 
@@ -20,11 +20,11 @@ function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {value} = evt.target;
-    setFormData({...formData, rating: value});
+    setFormData({...formData, rating: +value});
   };
 
   const getRatingContent = () => {
-    const ratingScale: number[] = Array.from({length: MAX_PLACE_RATING}, (_, i) => i + 1);
+    const ratingScale: number[] = Array.from({length: MAX_PLACE_RATING}, (_, i) => MAX_PLACE_RATING - i);
     return (
       <>
         {
@@ -53,15 +53,14 @@ function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
     );
   };
 
-  const testFormData = {
-    comment: 'bla bla',
-    rating: 4
-  };
-
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    store.dispatch(sendReviewAction([testFormData, offerID]));
+    store.dispatch(sendReviewAction([formData, offerID]));
     store.dispatch(fetchReviewsAction(offerID));
+    setFormData({
+      rating: 0,
+      comment: ''
+    });
   };
 
   return (
@@ -95,7 +94,7 @@ function ReviewForm ({offerID}: ReviewFormProps):JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          // disabled
+          disabled={formData.comment.length < 10 || formData.rating === 0}
         >
             Submit
         </button>

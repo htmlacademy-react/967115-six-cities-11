@@ -147,7 +147,6 @@ function PlaceScreen (): JSX.Element {
                     Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewsList reviews={reviews} offerID={offer.id}/>
-                {/* <ReviewForm offerID={offer.id}/> */}
               </section>
             </div>
           </div>
