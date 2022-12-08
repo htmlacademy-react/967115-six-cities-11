@@ -95,5 +95,7 @@ export const enum NameSpace {
   User = 'USER',
   Offers = 'OFFERS', // сюда же сортировка, или в отодельный namespace
   Reviews = 'REVIEWS',
-  Cities = 'CITIES'
+  Cities = 'CITIES',
+  Sort = 'SORT',
+  Error = 'ERROR'
 }
