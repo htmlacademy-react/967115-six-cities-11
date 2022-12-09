@@ -20,6 +20,7 @@ export type OffersData = {
   isCurrentOfferDataLoading: boolean;
   nearbyOffers: Offer[];
   isNearbyOffersDataLoading: boolean;
+  error: boolean;
 }
 
 export type ReviewsData = {

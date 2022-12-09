@@ -13,7 +13,8 @@ const initialState: OffersData = {
   isCurrentOfferDataLoading: false, // учтен
   activePlaceCardID: null,
   nearbyOffers: [],
-  isNearbyOffersDataLoading: false
+  isNearbyOffersDataLoading: false,
+  error: false
 };
 
 export const offersData = createSlice({
@@ -50,7 +51,6 @@ export const offersData = createSlice({
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
         state.isNearbyOffersDataLoading = false;
-      });
+      })
   },
 });
-
