@@ -36,7 +36,3 @@ export type SortProcess = {
   isSortMenuOpened: boolean;
   activeSortOption: string;
 }
-
-export type ErrorData = {
-  error: boolean;
-}

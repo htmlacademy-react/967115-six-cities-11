@@ -7,10 +7,10 @@ import {
   fetchNearbyOffersAction} from '../api-actions';
 
 const initialState: OffersData = {
-  offers: [], // учтен
-  isOffersDataLoading: false, // учтен
-  currentOffer: null, // учтен
-  isCurrentOfferDataLoading: false, // учтен
+  offers: [],
+  isOffersDataLoading: false,
+  currentOffer: null,
+  isCurrentOfferDataLoading: false,
   activePlaceCardID: null,
   nearbyOffers: [],
   isNearbyOffersDataLoading: false,
@@ -54,3 +54,5 @@ export const offersData = createSlice({
       })
   },
 });
+
+export const {changeActivePlaceCardID} = offersData.actions; 

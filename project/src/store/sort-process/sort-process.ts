@@ -20,3 +20,5 @@ export const sortProcess = createSlice({
     }
   }
 });
+
+export const {toggleSortMenu, changeSortOption} = sortProcess.actions;
