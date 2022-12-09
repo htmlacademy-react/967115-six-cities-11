@@ -8,11 +8,13 @@ import {offersInCity} from '../../utils';
 import SortOptions from '../../components/sort-options/sort-options';
 import LoadingOffers from '../../components/loading-offers/loading-offers';
 import UserNavigation from '../../components/user-navigation/user-navigation';
+import {getOffers, getOffersLoadingStatus} from '../../store/offers-data/selectors';
+import {getCity} from '../../store/city-data/selectors';
 
 function MainScreen ():JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const city = useAppSelector((state) => state.city);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const offers = useAppSelector(getOffers);
+  const city = useAppSelector(getCity);
+  const isOffersDataLoading = useAppSelector(getOffersLoadingStatus);
   const cityOffers = offers ? offersInCity(offers, city.name) : [];
 
   return (

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {OffersData} from '../../types/state';
 import { NameSpace } from '../../constants';
 import {
@@ -21,7 +21,7 @@ export const offersData = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {
-    changeActivePlaceCardID: (state, action) => {
+    changeActivePlaceCardID: (state, action: PayloadAction<number | null>) => {
       state.activePlaceCardID = action.payload;
     }
   },
@@ -51,8 +51,8 @@ export const offersData = createSlice({
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
         state.isNearbyOffersDataLoading = false;
-      })
+      });
   },
 });
 
-export const {changeActivePlaceCardID} = offersData.actions; 
+export const {changeActivePlaceCardID} = offersData.actions;

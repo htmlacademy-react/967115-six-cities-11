@@ -1,6 +1,6 @@
-import { NameSpace } from "../../constants";
-import { Offer } from "../../types/offer";
-import { State } from "../../types/state";
+import { NameSpace } from '../../constants';
+import { Offer } from '../../types/offer';
+import { State } from '../../types/state';
 
 export const getOffers = (state: State): Offer[] => state[NameSpace.Offers].offers;
 export const getOffersLoadingStatus = (state: State): boolean => state[NameSpace.Offers].isOffersDataLoading;

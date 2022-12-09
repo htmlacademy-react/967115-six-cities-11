@@ -4,9 +4,10 @@ import CityCards from '../../components/city-cards/city-cards';
 import UserNavigation from '../../components/user-navigation/user-navigation';
 import {offersInCity} from '../../utils';
 import {useAppSelector} from '../../hooks/index';
+import {getOffers} from '../../store/offers-data/selectors';
 
 function FavoritesScreen (): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   return (
     <div className="page">

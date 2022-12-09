@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReviewsData } from '../../types/state';
 import { NameSpace } from '../../constants';
-import {fetchReviewsAction, sendReviewAction} from '../api-actions';
+import {fetchReviewsAction} from '../api-actions';
 
 const initialState: ReviewsData = {
   reviews: [],

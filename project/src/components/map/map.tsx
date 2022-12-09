@@ -5,6 +5,7 @@ import useMap from '../../hooks/use-map';
 import {useAppSelector} from '../../hooks/index';
 import { Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {getActivePlaceCardID} from '../../store/offers-data/selectors';
 
 type MapProps = {
   city: City;
@@ -26,7 +27,7 @@ const activeCustomIcon = new Icon ({
 function Map ({city, offers}: MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
-  const activePlaceCardID = useAppSelector((state) => state.activePlaceCardID);
+  const activePlaceCardID = useAppSelector(getActivePlaceCardID);
 
   useEffect(() => {
     const offersLayer = new LayerGroup ();

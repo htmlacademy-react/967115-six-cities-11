@@ -5,14 +5,16 @@ import {useAppSelector} from '../../hooks/index';
 import {useEffect} from 'react';
 import {fetchReviewsAction} from '../../store/api-actions';
 import {AuthorizationStatuses} from '../../constants';
+import {getReviews} from '../../store/reviews-data/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 type ReviewListProps = {
   offerId: number;
 }
 
 function ReviewsList ({offerId}: ReviewListProps): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const reviews = useAppSelector(getReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     store.dispatch(fetchReviewsAction(offerId));

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants';
 import { SortProcess } from '../../types/state';
 import { SORT_OPTIONS } from '../../constants';
@@ -15,7 +15,7 @@ export const sortProcess = createSlice({
     toggleSortMenu: (state) => {
       state.isSortMenuOpened = !state.isSortMenuOpened;
     },
-    changeSortOption: (state, action) => {
+    changeSortOption: (state, action: PayloadAction<string>) => {
       state.activeSortOption = action.payload;
     }
   }
