@@ -26,7 +26,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'offer/fetchOffers',
+  'offer/fetchFavoriteOffers',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoutes.Favorites);
     return data;

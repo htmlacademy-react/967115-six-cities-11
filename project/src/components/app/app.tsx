@@ -7,7 +7,7 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFound404Screen from '../../pages/not-found-404-screen/not-found-404-screen';
 import { store } from '../../store/index';
-import {fetchOffersAction, checkAuthAction} from '../../store/api-actions';
+import {fetchOffersAction, checkAuthAction, fetchFavoriteOffersAction} from '../../store/api-actions';
 import { useEffect } from 'react';
 
 function App(): JSX.Element {
@@ -15,6 +15,7 @@ function App(): JSX.Element {
   useEffect(() => {
     store.dispatch(fetchOffersAction());
     store.dispatch(checkAuthAction());
+    store.dispatch(fetchFavoriteOffersAction());
   },[]);
 
   return (
