@@ -1,6 +1,9 @@
 import {Offer} from '../../types/offer';
 import {setStarRating} from '../../utils';
 import {Link} from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
+import {selectAuthorizationStatus} from '../../store/user/selectors';
+import { AuthorizationStatuses } from '../../constants';
 import cn from 'classnames';
 
 type PlaceCardProps = {
@@ -18,12 +21,15 @@ function PlaceCard ({
 
   const {
     isPremium,
+    isFavorite,
     previewImage,
     type,
     price,
     title,
     rating
   } = offer;
+
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   return (
     <article
@@ -63,7 +69,11 @@ function PlaceCard ({
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className={cn(
+              'place-card__bookmark-button',
+              'button',
+              {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isFavorite}
+            )}
             type="button"
           >
             <svg
