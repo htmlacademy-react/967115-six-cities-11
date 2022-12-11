@@ -34,6 +34,9 @@ export const offers = createSlice({
         state.offers = action.payload;
         state.isOffersDataLoading = false;
       })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+      })
       .addCase(fetchCurrentOfferAction.pending, (state) => {
         state.isCurrentOfferDataLoading = true;
       })
@@ -43,6 +46,7 @@ export const offers = createSlice({
         state.error = false;
       })
       .addCase(fetchCurrentOfferAction.rejected, (state) => {
+        state.isCurrentOfferDataLoading = false;
         state.error = true;
       })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
@@ -50,6 +54,9 @@ export const offers = createSlice({
       })
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
+        state.isNearbyOffersDataLoading = false;
+      })
+      .addCase(fetchNearbyOffersAction.rejected, (state) => {
         state.isNearbyOffersDataLoading = false;
       });
   },
