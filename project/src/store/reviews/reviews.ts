@@ -8,7 +8,7 @@ const initialState: ReviewsData = {
   isReviewsDataLoading: false
 };
 
-export const reviewsData = createSlice({
+export const reviews = createSlice({
   name: NameSpace.Reviews,
   initialState,
   reducers: {},

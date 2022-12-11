@@ -8,8 +8,8 @@ import {offersInCity} from '../../utils';
 import SortOptions from '../../components/sort-options/sort-options';
 import LoadingOffers from '../../components/loading-offers/loading-offers';
 import UserNavigation from '../../components/user-navigation/user-navigation';
-import {getOffers, getOffersLoadingStatus} from '../../store/offers-data/selectors';
-import {getCity} from '../../store/city-data/selectors';
+import {getOffers, getOffersLoadingStatus} from '../../store/offers/selectors';
+import {getCity} from '../../store/city/selectors';
 
 function MainScreen ():JSX.Element {
   const offers = useAppSelector(getOffers);

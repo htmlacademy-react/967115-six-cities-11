@@ -17,7 +17,7 @@ const initialState: OffersData = {
   error: false
 };
 
-export const offersData = createSlice({
+export const offers = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {
@@ -55,4 +55,4 @@ export const offersData = createSlice({
   },
 });
 
-export const {changeActivePlaceCardID} = offersData.actions;
+export const {changeActivePlaceCardID} = offers.actions;

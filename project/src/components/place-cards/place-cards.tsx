@@ -2,8 +2,8 @@ import PlaceCard from '../place-card/place-card';
 import {Offer} from '../../types/offer';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {sortingByOption} from '../../utils';
-import { changeActivePlaceCardID } from '../../store/offers-data/offers-data';
-import {getActiveSortOption} from '../../store/sort-process/selectors';
+import { changeActivePlaceCardID } from '../../store/offers/offers';
+import {getActiveSortOption} from '../../store/sort/selectors';
 import cn from 'classnames';
 
 

@@ -10,8 +10,8 @@ import { fetchCurrentOfferAction, fetchNearbyOffersAction } from '../../store/ap
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
 import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
-import {getCurrentOffer, getNearbyOffers, getError} from '../../store/offers-data/selectors';
-import {getReviews} from '../../store/reviews-data/selectors';
+import {getCurrentOffer, getNearbyOffers, getError} from '../../store/offers/selectors';
+import {getReviews} from '../../store/reviews/selectors';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();

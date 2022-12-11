@@ -1,7 +1,7 @@
 import {SORT_OPTIONS} from '../../constants';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import { toggleSortMenu, changeSortOption } from '../../store/sort-process/sort-process';
-import {getSortMenuStatus, getActiveSortOption} from '../../store/sort-process/selectors';
+import { toggleSortMenu, changeSortOption } from '../../store/sort/sort';
+import {getSortMenuStatus, getActiveSortOption} from '../../store/sort/selectors';
 import cn from 'classnames';
 
 function SortOptions (): JSX.Element {

@@ -8,7 +8,7 @@ const initialState: SortProcess = {
   activeSortOption: SORT_OPTIONS[0] // заменить индекс на константу с инициирующим значением
 };
 
-export const sortProcess = createSlice({
+export const sort = createSlice({
   name: NameSpace.Sort,
   initialState,
   reducers: {
@@ -21,4 +21,4 @@ export const sortProcess = createSlice({
   }
 });
 
-export const {toggleSortMenu, changeSortOption} = sortProcess.actions;
+export const {toggleSortMenu, changeSortOption} = sort.actions;

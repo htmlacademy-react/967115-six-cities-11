@@ -1,8 +1,8 @@
 import {City} from '../../types/city';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {changeCity} from '../../store/city-data/city-data';
+import {changeCity} from '../../store/city/city';
 import cn from 'classnames';
-import {getCity} from '../../store/city-data/selectors';
+import {getCity} from '../../store/city/selectors';
 
 type CitiesListProps = {
   cities: City[];
