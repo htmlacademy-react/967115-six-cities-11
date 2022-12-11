@@ -3,10 +3,10 @@ import {AuthorizationStatuses} from '../../constants';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {logoutAction} from '../../store/api-actions';
 import {AppRoutes} from '../../constants';
-import {getAuthorizationStatus} from '../../store/user/selectors';
+import {selectAuthorizationStatus} from '../../store/user/selectors';
 
 function UserNavigation (): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

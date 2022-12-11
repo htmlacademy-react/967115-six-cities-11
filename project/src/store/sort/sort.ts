@@ -5,7 +5,7 @@ import { SORT_OPTIONS } from '../../constants';
 
 const initialState: SortProcess = {
   isSortMenuOpened: false,
-  activeSortOption: SORT_OPTIONS[0] // заменить индекс на константу с инициирующим значением
+  activeSortOption: SORT_OPTIONS[0]
 };
 
 export const sort = createSlice({

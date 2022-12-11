@@ -3,7 +3,7 @@ import {Offer} from '../../types/offer';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {sortingByOption} from '../../utils';
 import { changeActivePlaceCardID } from '../../store/offers/offers';
-import {getActiveSortOption} from '../../store/sort/selectors';
+import {selectActiveSortOption} from '../../store/sort/selectors';
 import cn from 'classnames';
 
 
@@ -13,7 +13,7 @@ type PlaceCardsProps = {
 }
 
 function PlaceCards ({offers, isNearby}: PlaceCardsProps):JSX.Element {
-  const activeSortOption = useAppSelector(getActiveSortOption);
+  const activeSortOption = useAppSelector(selectActiveSortOption);
   const dispatch = useAppDispatch();
 
   const sortedOffers = sortingByOption(activeSortOption, offers);

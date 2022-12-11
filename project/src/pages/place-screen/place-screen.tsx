@@ -10,15 +10,15 @@ import { fetchCurrentOfferAction, fetchNearbyOffersAction } from '../../store/ap
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
 import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
-import {getCurrentOffer, getNearbyOffers, getError} from '../../store/offers/selectors';
-import {getReviews} from '../../store/reviews/selectors';
+import {selectCurrentOffer, selectNearbyOffers, selectError} from '../../store/offers/selectors';
+import {selectReviews} from '../../store/reviews/selectors';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
-  const offer = useAppSelector(getCurrentOffer);
-  const reviews = useAppSelector(getReviews);
-  const nearbyOffers = useAppSelector(getNearbyOffers);
-  const error = useAppSelector(getError);
+  const offer = useAppSelector(selectCurrentOffer);
+  const reviews = useAppSelector(selectReviews);
+  const nearbyOffers = useAppSelector(selectNearbyOffers);
+  const error = useAppSelector(selectError);
 
   useEffect(() => {
     if (params.id) {

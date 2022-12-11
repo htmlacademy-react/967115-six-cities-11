@@ -93,7 +93,7 @@ export const enum APIRoutes {
 
 export const enum NameSpace {
   User = 'USER',
-  Offers = 'OFFERS', // сюда же сортировка, или в отодельный namespace
+  Offers = 'OFFERS',
   Reviews = 'REVIEWS',
   Cities = 'CITIES',
   Sort = 'SORT',

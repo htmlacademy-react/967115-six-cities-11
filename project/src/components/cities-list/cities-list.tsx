@@ -2,14 +2,14 @@ import {City} from '../../types/city';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {changeCity} from '../../store/city/city';
 import cn from 'classnames';
-import {getCity} from '../../store/city/selectors';
+import {selectCity} from '../../store/city/selectors';
 
 type CitiesListProps = {
   cities: City[];
 }
 
 function CitiesList ({cities}: CitiesListProps): JSX.Element {
-  const activeCity = useAppSelector(getCity);
+  const activeCity = useAppSelector(selectCity);
   const dispatch = useAppDispatch();
 
   const onCityClick = (city: City) => dispatch(changeCity(city));
