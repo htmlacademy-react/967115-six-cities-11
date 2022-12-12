@@ -33,14 +33,14 @@ function PlaceCard ({
   } = offer;
 
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const onFavoriteButtonClick = async () => {
+  const handleFavoriteButtonClick = async () => {
     await store.dispatch(changeFavoriteStatus([id, isFavorite ? 0 : 1]));
     await store.dispatch(fetchOffersAction());
     await store.dispatch(fetchFavoriteOffersAction());
   };
 
-  const onTest = () => {
-    onFavoriteButtonClick();
+  const onFavoriteButtonClick = () => {
+    handleFavoriteButtonClick();
   };
 
   return (
@@ -87,7 +87,7 @@ function PlaceCard ({
               {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isFavorite}
             )}
             type="button"
-            onClick={onTest}
+            onClick={onFavoriteButtonClick}
           >
             <svg
               className="place-card__bookmark-icon"

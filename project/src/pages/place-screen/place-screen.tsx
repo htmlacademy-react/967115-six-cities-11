@@ -12,6 +12,7 @@ import PlaceCards from '../../components/place-cards/place-cards';
 import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
 import {selectCurrentOffer, selectNearbyOffers, selectError} from '../../store/offers/selectors';
 import {selectReviews} from '../../store/reviews/selectors';
+import cn from 'classnames';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
@@ -26,6 +27,7 @@ function PlaceScreen (): JSX.Element {
       store.dispatch(fetchNearbyOffersAction(+params.id));
     }
   }, [params.id]);
+  // Почему-то много запросов подряд на сервер идет
 
   if (error) {
     return <NotFound404Screen/>;
@@ -81,8 +83,15 @@ function PlaceScreen (): JSX.Element {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className={offer.isFavorite ? 'place-card__bookmark-icon' : 'property__bookmark-icon'} width={31} height={33}>
+                <button
+                  className={cn(
+                    'property__bookmark-button',
+                    'button',
+                    {'property__bookmark-button--active': offer.isFavorite}
+                  )}
+                  type="button"
+                >
+                  <svg className='property__bookmark-icon' width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
