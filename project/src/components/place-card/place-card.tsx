@@ -3,7 +3,9 @@ import {setStarRating} from '../../utils';
 import {Link} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import {selectAuthorizationStatus} from '../../store/user/selectors';
+import { store } from '../../store';
 import { AuthorizationStatuses } from '../../constants';
+import { changeFavoriteStatus, fetchOffersAction, fetchFavoriteOffersAction } from '../../store/api-actions';
 import cn from 'classnames';
 
 type PlaceCardProps = {
@@ -26,10 +28,20 @@ function PlaceCard ({
     type,
     price,
     title,
-    rating
+    rating,
+    id
   } = offer;
 
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const onFavoriteButtonClick = async () => {
+    await store.dispatch(changeFavoriteStatus([id, isFavorite ? 0 : 1]));
+    await store.dispatch(fetchOffersAction());
+    await store.dispatch(fetchFavoriteOffersAction());
+  };
+
+  const onTest = () => {
+    onFavoriteButtonClick();
+  };
 
   return (
     <article
@@ -75,6 +87,7 @@ function PlaceCard ({
               {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isFavorite}
             )}
             type="button"
+            onClick={onTest}
           >
             <svg
               className="place-card__bookmark-icon"
