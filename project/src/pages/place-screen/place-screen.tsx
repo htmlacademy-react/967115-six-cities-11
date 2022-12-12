@@ -27,7 +27,6 @@ function PlaceScreen (): JSX.Element {
       store.dispatch(fetchNearbyOffersAction(+params.id));
     }
   }, [params.id]);
-  // Почему-то много запросов подряд на сервер идет
 
   if (error) {
     return <NotFound404Screen/>;

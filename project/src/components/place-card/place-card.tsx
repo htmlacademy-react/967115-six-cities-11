@@ -1,4 +1,6 @@
 import {Offer} from '../../types/offer';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../constants';
 import {setStarRating} from '../../utils';
 import {Link} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
@@ -32,6 +34,8 @@ function PlaceCard ({
     id
   } = offer;
 
+  const navigate = useNavigate();
+
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const handleFavoriteButtonClick = async () => {
     await store.dispatch(changeFavoriteStatus([id, isFavorite ? 0 : 1]));
@@ -40,7 +44,11 @@ function PlaceCard ({
   };
 
   const onFavoriteButtonClick = () => {
-    handleFavoriteButtonClick();
+    if (authorizationStatus === AuthorizationStatuses.Auth) {
+      handleFavoriteButtonClick();
+    } else {
+      navigate(AppRoutes.Login);
+    }
   };
 
   return (
