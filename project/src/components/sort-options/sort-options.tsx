@@ -1,11 +1,12 @@
 import {SORT_OPTIONS} from '../../constants';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import { toggleSortMenu, changeSortOption } from '../../store/actions';
+import { toggleSortMenu, changeSortOption } from '../../store/sort/sort';
+import {selectSortMenuStatus, selectActiveSortOption} from '../../store/sort/selectors';
 import cn from 'classnames';
 
 function SortOptions (): JSX.Element {
-  const isSortMenuOpened = useAppSelector((state) => state.isSortMenuOpened);
-  const activeSortOption = useAppSelector((state) => state.activeSortOption);
+  const isSortMenuOpened = useAppSelector(selectSortMenuStatus);
+  const activeSortOption = useAppSelector(selectActiveSortOption);
 
   const dispatch = useAppDispatch();
 

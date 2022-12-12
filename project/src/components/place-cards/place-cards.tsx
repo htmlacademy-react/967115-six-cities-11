@@ -2,7 +2,8 @@ import PlaceCard from '../place-card/place-card';
 import {Offer} from '../../types/offer';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {sortingByOption} from '../../utils';
-import { changeActivePlaceCardID } from '../../store/actions';
+import { changeActivePlaceCardID } from '../../store/offers/offers';
+import {selectActiveSortOption} from '../../store/sort/selectors';
 import cn from 'classnames';
 
 
@@ -12,7 +13,7 @@ type PlaceCardsProps = {
 }
 
 function PlaceCards ({offers, isNearby}: PlaceCardsProps):JSX.Element {
-  const activeSortOption = useAppSelector((state) => state.activeSortOption);
+  const activeSortOption = useAppSelector(selectActiveSortOption);
   const dispatch = useAppDispatch();
 
   const sortedOffers = sortingByOption(activeSortOption, offers);

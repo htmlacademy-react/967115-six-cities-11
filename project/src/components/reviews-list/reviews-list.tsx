@@ -5,17 +5,19 @@ import {useAppSelector} from '../../hooks/index';
 import {useEffect} from 'react';
 import {fetchReviewsAction} from '../../store/api-actions';
 import {AuthorizationStatuses} from '../../constants';
+import {selectReviews} from '../../store/reviews/selectors';
+import {selectAuthorizationStatus} from '../../store/user/selectors';
 
 type ReviewListProps = {
-  offerID: number;
+  offerId: number;
 }
 
-function ReviewsList ({offerID}: ReviewListProps): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
-  const AuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+function ReviewsList ({offerId}: ReviewListProps): JSX.Element {
+  const reviews = useAppSelector(selectReviews);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   useEffect(() => {
-    store.dispatch(fetchReviewsAction(offerID));
+    store.dispatch(fetchReviewsAction(offerId));
   });
 
   return (
@@ -26,7 +28,7 @@ function ReviewsList ({offerID}: ReviewListProps): JSX.Element {
         }
       </ul>
       {
-        AuthorizationStatus === AuthorizationStatuses.Auth && <ReviewForm offerID={offerID}/>
+        authorizationStatus === AuthorizationStatuses.Auth && <ReviewForm offerId={offerId}/>
       }
     </>
   );

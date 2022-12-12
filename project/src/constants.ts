@@ -90,3 +90,12 @@ export const enum APIRoutes {
   Logout = '/logout',
   Comments = '/comments'
 }
+
+export const enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Reviews = 'REVIEWS',
+  Cities = 'CITIES',
+  Sort = 'SORT',
+  Error = 'ERROR'
+}

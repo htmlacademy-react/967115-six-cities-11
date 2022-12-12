@@ -10,13 +10,15 @@ import { fetchCurrentOfferAction, fetchNearbyOffersAction } from '../../store/ap
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
 import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
+import {selectCurrentOffer, selectNearbyOffers, selectError} from '../../store/offers/selectors';
+import {selectReviews} from '../../store/reviews/selectors';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
-  const offer = useAppSelector((state) => state.currentOffer);
-  const reviews = useAppSelector((state) => state.reviews);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const error = useAppSelector((state) => state.error);
+  const offer = useAppSelector(selectCurrentOffer);
+  const reviews = useAppSelector(selectReviews);
+  const nearbyOffers = useAppSelector(selectNearbyOffers);
+  const error = useAppSelector(selectError);
 
   useEffect(() => {
     if (params.id) {
@@ -145,7 +147,7 @@ function PlaceScreen (): JSX.Element {
                 <h2 className="reviews__title">
                     Reviews · <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList offerID={offer.id}/>
+                <ReviewsList offerId={offer.id}/>
               </section>
             </div>
           </div>
