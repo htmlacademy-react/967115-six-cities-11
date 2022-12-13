@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../constants';
 import {setStarRating} from '../../utils';
 import {Link} from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import {selectAuthorizationStatus} from '../../store/user/selectors';
-import { store } from '../../store';
+import { selectFavoriteOffers } from '../../store/offers/selectors';
 import { AuthorizationStatuses } from '../../constants';
-import { changeFavoriteStatus, fetchOffersAction, fetchFavoriteOffersAction } from '../../store/api-actions';
+import { changeFavoriteStatus, fetchFavoriteOffersAction } from '../../store/api-actions';
 import cn from 'classnames';
 
 type PlaceCardProps = {
@@ -25,7 +25,6 @@ function PlaceCard ({
 
   const {
     isPremium,
-    isFavorite,
     previewImage,
     type,
     price,
@@ -35,12 +34,16 @@ function PlaceCard ({
   } = offer;
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
+  const isOfferFavorite = favoriteOffers.find((item) => item.id === offer.id)?.isFavorite;
+
+
   const handleFavoriteButtonClick = async () => {
-    await store.dispatch(changeFavoriteStatus([id, isFavorite ? 0 : 1]));
-    await store.dispatch(fetchOffersAction());
-    await store.dispatch(fetchFavoriteOffersAction());
+    await dispatch(changeFavoriteStatus([id, isOfferFavorite ? 0 : 1]));
+    await dispatch(fetchFavoriteOffersAction());
   };
 
   const onFavoriteButtonClick = () => {
@@ -92,7 +95,7 @@ function PlaceCard ({
             className={cn(
               'place-card__bookmark-button',
               'button',
-              {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isFavorite}
+              {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isOfferFavorite}
             )}
             type="button"
             onClick={onFavoriteButtonClick}

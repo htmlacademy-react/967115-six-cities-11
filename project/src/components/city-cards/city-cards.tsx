@@ -2,7 +2,7 @@ import {Offer} from '../../types/offer';
 import {Link} from 'react-router-dom';
 import {setStarRating, offersInCity} from '../../utils';
 import { fetchFavoriteOffersAction, changeFavoriteStatus, fetchOffersAction } from '../../store/api-actions';
-import { store } from '../../store';
+import { useAppDispatch } from '../../hooks';
 import cn from 'classnames';
 
 type CityCardsProps = {
@@ -12,15 +12,12 @@ type CityCardsProps = {
 
 function CityCards ({city, offers}: CityCardsProps): JSX.Element {
   const cityOffers = offersInCity(offers, city);
-
-  const handleFavoriteButtonClick = async (offer: Offer) => {
-    await store.dispatch(changeFavoriteStatus([offer.id, offer.isFavorite ? 0 : 1]));
-    await store.dispatch(fetchFavoriteOffersAction());
-    await store.dispatch(fetchOffersAction());
-  };
+  const dispatch = useAppDispatch();
 
   const onFavoriteButtonClick = (offer: Offer) => {
-    handleFavoriteButtonClick(offer);
+    dispatch(changeFavoriteStatus([offer.id, offer.isFavorite ? 0 : 1]));
+    dispatch(fetchFavoriteOffersAction());
+    dispatch(fetchOffersAction());
   };
 
   return (

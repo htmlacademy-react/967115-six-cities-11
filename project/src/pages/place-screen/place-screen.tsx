@@ -13,13 +13,15 @@ import NotFound404Screen from '../not-found-404-screen/not-found-404-screen';
 import {selectCurrentOffer, selectNearbyOffers, selectError} from '../../store/offers/selectors';
 import {selectReviews} from '../../store/reviews/selectors';
 import cn from 'classnames';
+import { Offer } from '../../types/offer';
 
 function PlaceScreen (): JSX.Element {
   const params = useParams();
-  const offer = useAppSelector(selectCurrentOffer);
+  const offer = useAppSelector(selectCurrentOffer) as Offer;
   const reviews = useAppSelector(selectReviews);
   const nearbyOffers = useAppSelector(selectNearbyOffers);
   const error = useAppSelector(selectError);
+  const arr = nearbyOffers.concat(offer);
 
   useEffect(() => {
     if (params.id) {
@@ -160,7 +162,7 @@ function PlaceScreen (): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={offer.city} offers={nearbyOffers}/>
+            <Map city={offer.city} offers={arr}/>
           </section>
         </section>
         <div className="container">
