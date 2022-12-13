@@ -16,6 +16,8 @@ export type OffersData = {
   offers: Offer[];
   isOffersDataLoading: boolean;
   currentOffer: Offer | null;
+  favoriteOffers: Offer[];
+  isFavoriteOffersDataLoading: boolean;
   activePlaceCardID: number | null;
   isCurrentOfferDataLoading: boolean;
   nearbyOffers: Offer[];

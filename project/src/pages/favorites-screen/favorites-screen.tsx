@@ -4,10 +4,17 @@ import CityCards from '../../components/city-cards/city-cards';
 import UserNavigation from '../../components/user-navigation/user-navigation';
 import {offersInCity} from '../../utils';
 import {useAppSelector} from '../../hooks/index';
-import {selectOffers} from '../../store/offers/selectors';
+import {selectFavoriteOffers} from '../../store/offers/selectors';
+import {fetchFavoriteOffersAction} from '../../store/api-actions';
+import {useEffect} from 'react';
+import {store} from '../../store/index';
 
 function FavoritesScreen (): JSX.Element {
-  const offers = useAppSelector(selectOffers);
+  const offers = useAppSelector(selectFavoriteOffers);
+
+  useEffect(() => {
+    store.dispatch(fetchFavoriteOffersAction());
+  }, []);
 
   return (
     <div className="page">

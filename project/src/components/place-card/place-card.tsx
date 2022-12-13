@@ -1,6 +1,13 @@
 import {Offer} from '../../types/offer';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../constants';
 import {setStarRating} from '../../utils';
 import {Link} from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import {selectAuthorizationStatus} from '../../store/user/selectors';
+import { selectFavoriteOffers } from '../../store/offers/selectors';
+import { AuthorizationStatuses } from '../../constants';
+import { changeFavoriteStatus, fetchFavoriteOffersAction } from '../../store/api-actions';
 import cn from 'classnames';
 
 type PlaceCardProps = {
@@ -22,8 +29,30 @@ function PlaceCard ({
     type,
     price,
     title,
-    rating
+    rating,
+    id
   } = offer;
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
+  const isOfferFavorite = favoriteOffers.find((item) => item.id === offer.id)?.isFavorite;
+
+
+  const handleFavoriteButtonClick = async () => {
+    await dispatch(changeFavoriteStatus([id, isOfferFavorite ? 0 : 1]));
+    await dispatch(fetchFavoriteOffersAction());
+  };
+
+  const onFavoriteButtonClick = () => {
+    if (authorizationStatus === AuthorizationStatuses.Auth) {
+      handleFavoriteButtonClick();
+    } else {
+      navigate(AppRoutes.Login);
+    }
+  };
 
   return (
     <article
@@ -53,7 +82,7 @@ function PlaceCard ({
             width={260}
             height={200}
             alt=""
-          />
+          />ыва
         </Link>
       </div>
       <div className="place-card__info">
@@ -63,8 +92,13 @@ function PlaceCard ({
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className={cn(
+              'place-card__bookmark-button',
+              'button',
+              {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isOfferFavorite}
+            )}
             type="button"
+            onClick={onFavoriteButtonClick}
           >
             <svg
               className="place-card__bookmark-icon"

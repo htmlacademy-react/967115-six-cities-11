@@ -4,13 +4,16 @@ import { NameSpace } from '../../constants';
 import {
   fetchOffersAction,
   fetchCurrentOfferAction,
-  fetchNearbyOffersAction} from '../api-actions';
+  fetchNearbyOffersAction,
+  fetchFavoriteOffersAction} from '../api-actions';
 
 const initialState: OffersData = {
   offers: [],
   isOffersDataLoading: false,
   currentOffer: null,
   isCurrentOfferDataLoading: false,
+  favoriteOffers: [],
+  isFavoriteOffersDataLoading: false,
   activePlaceCardID: null,
   nearbyOffers: [],
   isNearbyOffersDataLoading: false,
@@ -36,6 +39,16 @@ export const offers = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
+      })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.isFavoriteOffersDataLoading = true;
+      })
+      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+        state.isFavoriteOffersDataLoading = false;
+      })
+      .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.isFavoriteOffersDataLoading = false;
       })
       .addCase(fetchCurrentOfferAction.pending, (state) => {
         state.isCurrentOfferDataLoading = true;

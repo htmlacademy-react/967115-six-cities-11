@@ -4,9 +4,11 @@ import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {logoutAction} from '../../store/api-actions';
 import {AppRoutes} from '../../constants';
 import {selectAuthorizationStatus} from '../../store/user/selectors';
+import {selectFavoriteOffers} from '../../store/offers/selectors';
 
 function UserNavigation (): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ function UserNavigation (): JSX.Element {
                     <span className="header__user-name user__name">
                       Oliver.conner@gmail.com
                     </span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{favoriteOffers.length}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">

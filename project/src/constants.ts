@@ -88,7 +88,8 @@ export const enum APIRoutes {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
+  Favorites = '/favorite'
 }
 
 export const enum NameSpace {

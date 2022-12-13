@@ -18,7 +18,7 @@ function ReviewsList ({offerId}: ReviewListProps): JSX.Element {
 
   useEffect(() => {
     store.dispatch(fetchReviewsAction(offerId));
-  });
+  },[offerId]);
 
   return (
     <>

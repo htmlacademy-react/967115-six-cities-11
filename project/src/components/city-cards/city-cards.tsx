@@ -1,6 +1,9 @@
 import {Offer} from '../../types/offer';
 import {Link} from 'react-router-dom';
 import {setStarRating, offersInCity} from '../../utils';
+import { fetchFavoriteOffersAction, changeFavoriteStatus, fetchOffersAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
+import cn from 'classnames';
 
 type CityCardsProps = {
   city: string;
@@ -9,11 +12,18 @@ type CityCardsProps = {
 
 function CityCards ({city, offers}: CityCardsProps): JSX.Element {
   const cityOffers = offersInCity(offers, city);
+  const dispatch = useAppDispatch();
+
+  const onFavoriteButtonClick = (offer: Offer) => {
+    dispatch(changeFavoriteStatus([offer.id, offer.isFavorite ? 0 : 1]));
+    dispatch(fetchFavoriteOffersAction());
+    dispatch(fetchOffersAction());
+  };
 
   return (
     <>
       {cityOffers.map((cityOffer) =>
-      { const {price, id, isPremium, previewImage, rating, title, type} = cityOffer;
+      { const {price, id, isPremium, previewImage, rating, title, type, isFavorite} = cityOffer;
         return (
           <article key={id} className="favorites__card place-card">
             {
@@ -42,7 +52,12 @@ function CityCards ({city, offers}: CityCardsProps): JSX.Element {
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button place-card__bookmark-button--active button"
+                  className={cn(
+                    'place-card__bookmark-button',
+                    'button',
+                    {'place-card__bookmark-button--active': isFavorite}
+                  )}
+                  onClick={() => onFavoriteButtonClick(cityOffer)}
                   type="button"
                 >
                   <svg
