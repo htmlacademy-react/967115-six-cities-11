@@ -82,7 +82,7 @@ function PlaceCard ({
             width={260}
             height={200}
             alt=""
-          />
+          />ыва
         </Link>
       </div>
       <div className="place-card__info">
