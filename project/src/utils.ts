@@ -51,7 +51,7 @@ const sortRatingHighToLow = (a: Offer, b: Offer): number => {
 };
 
 export function sortingByOption (option: string, offers: Offer[]): Offer[] {
-  const sortedOffers = offers;
+  const sortedOffers = offers.slice();
   switch (option) {
     case SortOptionsValues.PriceLowToHigh:
       return sortedOffers.sort(sortPriceLowToHigh);
