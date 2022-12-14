@@ -11,7 +11,8 @@ export enum AppRoutes {
 export enum AuthorizationStatuses {
     Auth = 'AUTH',
     NoAuth = 'NO_AUTH',
-    Unknown = 'UNKNOWN'
+    Unknown = 'UNKNOWN',
+    Pending = 'Pending'
 }
 
 export const CITIES: City[] = [
