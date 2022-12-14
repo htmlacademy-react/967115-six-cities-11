@@ -2,6 +2,7 @@ import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
 import {MAX_PLACE_RATING} from '../../constants';
 import {fetchReviewsAction, sendReviewAction} from '../../store/api-actions';
 import {store} from '../../store/index';
+import { MAX_REVIEW_LENGTH } from '../../constants';
 
 type ReviewFormProps = {
   offerId: number;
@@ -81,6 +82,7 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
+        maxLength={MAX_REVIEW_LENGTH}
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={formData.comment}
       />

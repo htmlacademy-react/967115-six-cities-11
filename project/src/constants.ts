@@ -100,3 +100,5 @@ export const enum NameSpace {
   Sort = 'SORT',
   Error = 'ERROR'
 }
+
+export const MAX_REVIEW_LENGTH = 300;
