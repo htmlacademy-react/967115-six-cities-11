@@ -41,14 +41,14 @@ function PlaceCard ({
   const isOfferFavorite = favoriteOffers.find((item) => item.id === offer.id)?.isFavorite;
 
 
-  const handleFavoriteButtonClick = async () => {
+  const handleFavoriteChange = async () => {
     await dispatch(changeFavoriteStatus([id, isOfferFavorite ? 0 : 1]));
     await dispatch(fetchFavoriteOffersAction());
   };
 
-  const onFavoriteButtonClick = () => {
+  const handleFavoriteButtonClick = () => {
     if (authorizationStatus === AuthorizationStatuses.Auth) {
-      handleFavoriteButtonClick();
+      handleFavoriteChange();
     } else {
       navigate(AppRoutes.Login);
     }
@@ -82,7 +82,7 @@ function PlaceCard ({
             width={260}
             height={200}
             alt=""
-          />ыва
+          />
         </Link>
       </div>
       <div className="place-card__info">
@@ -98,7 +98,7 @@ function PlaceCard ({
               {'place-card__bookmark-button--active': authorizationStatus === AuthorizationStatuses.Auth && isOfferFavorite}
             )}
             type="button"
-            onClick={onFavoriteButtonClick}
+            onClick={handleFavoriteButtonClick}
           >
             <svg
               className="place-card__bookmark-icon"

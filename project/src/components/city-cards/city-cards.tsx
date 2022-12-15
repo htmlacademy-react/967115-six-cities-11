@@ -14,7 +14,7 @@ function CityCards ({city, offers}: CityCardsProps): JSX.Element {
   const cityOffers = offersInCity(offers, city);
   const dispatch = useAppDispatch();
 
-  const onFavoriteButtonClick = (offer: Offer) => {
+  const handleFavoriteButtonClick = (offer: Offer) => {
     dispatch(changeFavoriteStatus([offer.id, offer.isFavorite ? 0 : 1]));
     dispatch(fetchFavoriteOffersAction());
     dispatch(fetchOffersAction());
@@ -57,7 +57,7 @@ function CityCards ({city, offers}: CityCardsProps): JSX.Element {
                     'button',
                     {'place-card__bookmark-button--active': isFavorite}
                   )}
-                  onClick={() => onFavoriteButtonClick(cityOffer)}
+                  onClick={() => handleFavoriteButtonClick(cityOffer)}
                   type="button"
                 >
                   <svg

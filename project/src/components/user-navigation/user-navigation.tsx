@@ -12,7 +12,7 @@ function UserNavigation (): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onLogoutButtonClick = () => {
+  const handleLogoutButtonClick = () => {
     dispatch(logoutAction());
     navigate(AppRoutes.Root);
   };
@@ -39,7 +39,7 @@ function UserNavigation (): JSX.Element {
                 <li className="header__nav-item">
                   <button
                     className="header__nav-link border-solid"
-                    onClick={onLogoutButtonClick}
+                    onClick={handleLogoutButtonClick}
                   >
                     <span className="header__signout">Sign out</span>
                   </button>

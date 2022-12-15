@@ -2,6 +2,7 @@ import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
 import {MAX_PLACE_RATING} from '../../constants';
 import {fetchReviewsAction, sendReviewAction} from '../../store/api-actions';
 import {store} from '../../store/index';
+import { MAX_REVIEW_LENGTH } from '../../constants';
 
 type ReviewFormProps = {
   offerId: number;
@@ -36,6 +37,7 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
                 defaultValue={currentRating}
                 id={`${currentRating}-stars`}
                 type="radio"
+                checked={!!formData.rating}
               />
               <label
                 htmlFor={`${currentRating}-stars`}
@@ -56,11 +58,11 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     store.dispatch(sendReviewAction([formData, offerId]));
-    store.dispatch(fetchReviewsAction(offerId));
     setFormData({
       rating: 0,
       comment: ''
     });
+    store.dispatch(fetchReviewsAction(offerId));
   };
 
   return (
@@ -81,8 +83,10 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
+        maxLength={MAX_REVIEW_LENGTH}
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={formData.comment}
+        //defaultValue={formData.comment}
+        value={formData.comment}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -94,7 +98,7 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={formData.comment.length < 10 || formData.rating === 0}
+          disabled={formData.comment.length < 50 || formData.rating === 0}
         >
             Submit
         </button>

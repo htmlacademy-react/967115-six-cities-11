@@ -10,11 +10,11 @@ function SortOptions (): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const onSortMenuClick = () => {
+  const handleSortMenuClick = () => {
     dispatch(toggleSortMenu());
   };
 
-  const onSortOptionClick = (option: string) => {
+  const handleSortOptionClick = (option: string) => {
     dispatch(changeSortOption(option));
     dispatch(toggleSortMenu());
   };
@@ -25,7 +25,7 @@ function SortOptions (): JSX.Element {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={onSortMenuClick}
+        onClick={handleSortMenuClick}
       >
         {activeSortOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -49,7 +49,7 @@ function SortOptions (): JSX.Element {
               )}
               tabIndex={0}
               key={option}
-              onClick={() => onSortOptionClick(option)}
+              onClick={() => handleSortOptionClick(option)}
             >
               {option}
             </li>

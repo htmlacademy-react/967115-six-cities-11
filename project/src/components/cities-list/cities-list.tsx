@@ -12,7 +12,7 @@ function CitiesList ({cities}: CitiesListProps): JSX.Element {
   const activeCity = useAppSelector(selectCity);
   const dispatch = useAppDispatch();
 
-  const onCityClick = (city: City) => dispatch(changeCity(city));
+  const handleCityClick = (city: City) => dispatch(changeCity(city));
 
   return (
     <ul className="locations__list tabs__list">
@@ -29,7 +29,7 @@ function CitiesList ({cities}: CitiesListProps): JSX.Element {
                 'border-solid',
                 {'tabs__item--active': city.name === activeCity.name}
               )}
-              onClick={() => onCityClick(city)}
+              onClick={() => handleCityClick(city)}
             >
               <span>{city.name}</span>
             </button>

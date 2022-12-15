@@ -11,7 +11,8 @@ export enum AppRoutes {
 export enum AuthorizationStatuses {
     Auth = 'AUTH',
     NoAuth = 'NO_AUTH',
-    Unknown = 'UNKNOWN'
+    Unknown = 'UNKNOWN',
+    Pending = 'Pending'
 }
 
 export const CITIES: City[] = [
@@ -100,3 +101,7 @@ export const enum NameSpace {
   Sort = 'SORT',
   Error = 'ERROR'
 }
+
+export const MAX_REVIEW_LENGTH = 300;
+
+export const MAX_REVIEW_QUANTITY = 10;
