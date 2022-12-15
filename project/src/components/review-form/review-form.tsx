@@ -37,6 +37,7 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
                 defaultValue={currentRating}
                 id={`${currentRating}-stars`}
                 type="radio"
+                checked={!!formData.rating}
               />
               <label
                 htmlFor={`${currentRating}-stars`}
@@ -57,11 +58,11 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     store.dispatch(sendReviewAction([formData, offerId]));
-    store.dispatch(fetchReviewsAction(offerId));
     setFormData({
       rating: 0,
       comment: ''
     });
+    store.dispatch(fetchReviewsAction(offerId));
   };
 
   return (
@@ -84,7 +85,8 @@ function ReviewForm ({offerId}: ReviewFormProps):JSX.Element {
         name="review"
         maxLength={MAX_REVIEW_LENGTH}
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={formData.comment}
+        //defaultValue={formData.comment}
+        value={formData.comment}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

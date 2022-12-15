@@ -23,13 +23,15 @@ function LoginScreen ():JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current !== null && passwordRef.current !== null && regexp.test(passwordRef.current.value)) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value
       });
     }
   };
+
+  const regexp = new RegExp('(?=.*[a-z])(?=.*\\d)');
 
   return (
     authorizationStatus === AuthorizationStatuses.Auth
@@ -82,7 +84,6 @@ function LoginScreen ():JSX.Element {
                       type="password"
                       name="password"
                       placeholder="Password"
-                      // pattern="(?=.*[a-z])"
                       required
                     />
                   </div>
