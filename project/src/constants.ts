@@ -103,3 +103,5 @@ export const enum NameSpace {
 }
 
 export const MAX_REVIEW_LENGTH = 300;
+
+export const MAX_REVIEW_QUANTITY = 10;

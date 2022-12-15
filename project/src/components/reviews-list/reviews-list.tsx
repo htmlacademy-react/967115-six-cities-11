@@ -7,13 +7,14 @@ import {fetchReviewsAction} from '../../store/api-actions';
 import {AuthorizationStatuses} from '../../constants';
 import {selectReviews} from '../../store/reviews/selectors';
 import {selectAuthorizationStatus} from '../../store/user/selectors';
+import { MAX_REVIEW_QUANTITY } from '../../constants';
 
 type ReviewListProps = {
   offerId: number;
 }
 
 function ReviewsList ({offerId}: ReviewListProps): JSX.Element {
-  const reviews = useAppSelector(selectReviews);
+  const reviews = useAppSelector(selectReviews).slice(0, MAX_REVIEW_QUANTITY);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   useEffect(() => {

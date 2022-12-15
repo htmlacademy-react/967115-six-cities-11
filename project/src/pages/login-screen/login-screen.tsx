@@ -76,6 +76,7 @@ function LoginScreen ():JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  // pattern="(?=.*[a-z])"
                   required
                 />
               </div>
