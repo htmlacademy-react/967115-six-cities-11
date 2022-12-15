@@ -1,4 +1,5 @@
 import { Offer } from './types/offer';
+import { Review } from './types/review';
 import {SortOptionsValues} from './constants';
 import dayjs from 'dayjs';
 
@@ -44,6 +45,18 @@ const sortRatingHighToLow = (a: Offer, b: Offer): number => {
   }
 
   if (a.rating > b.rating) {
+    return -1;
+  }
+
+  return 0;
+};
+
+export const sortReviewsNewToOld = (a: Review, b: Review): number => {
+  if (a.date < b.date) {
+    return 1;
+  }
+
+  if (a.date > b.date) {
     return -1;
   }
 

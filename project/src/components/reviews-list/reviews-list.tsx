@@ -8,13 +8,16 @@ import {AuthorizationStatuses} from '../../constants';
 import {selectReviews} from '../../store/reviews/selectors';
 import {selectAuthorizationStatus} from '../../store/user/selectors';
 import { MAX_REVIEW_QUANTITY } from '../../constants';
+import { sortReviewsNewToOld } from '../../utils';
 
 type ReviewListProps = {
   offerId: number;
 }
 
 function ReviewsList ({offerId}: ReviewListProps): JSX.Element {
-  const reviews = useAppSelector(selectReviews).slice(0, MAX_REVIEW_QUANTITY);
+  const reviews = useAppSelector(selectReviews)
+    .slice(0, MAX_REVIEW_QUANTITY)
+    .sort(sortReviewsNewToOld);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   useEffect(() => {
